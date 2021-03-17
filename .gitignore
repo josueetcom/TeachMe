@@ -3,4 +3,5 @@
 .settings/
 .theia/
 .vscode/
+node_modules/
 target/

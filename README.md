@@ -1,8 +1,43 @@
-This directory is where you'll write all of your code!
+# TeachMe
 
-By default it contains a barebones portfolio web app. To run a local server,
+Find teachers and exchange partners for the skill you want to learn!
+
+## Development
+
+### Prerequisites
+
+- [git](https://git-scm.com/)
+- [npm](https://www.npmjs.com/get-npm)
+
+If you use Google Cloud Shell, these are already installed.
+
+### Setup
+
+1. Clone the repo.
+
+   ```sh
+   git clone https://github.com/josueetcom/TeachMe.git
+   ```
+
+2. `cd` into the repo and setup pre-commit hooks by running:
+
+   ```sh
+   npm install
+   ```
+
+### Development
+
+To run a local server,
 execute this command:
 
-```
-mvn package exec:java
-```
+    ```sh
+    mvn package exec:java
+    ```
+
+### Deployment
+
+To deploy the app, you'll need to change the `<googleCloudProjectId>` value in [`pom.xml`](pom.xml#L19) to your Google Cloud Project and then run:
+
+    ```sh
+    mvn package appengine:deploy
+    ```
