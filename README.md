@@ -15,29 +15,21 @@ If you use Google Cloud Shell, these are already installed.
 
 1. Clone the repo.
 
-   ```sh
-   git clone https://github.com/josueetcom/TeachMe.git
-   ```
+       git clone https://github.com/josueetcom/TeachMe.git
 
 2. `cd` into the repo and setup pre-commit hooks by running:
 
-   ```sh
-   npm install
-   ```
+       npm install
 
 ### Development
 
 To run a local server,
 execute this command:
 
-    ```sh
     mvn package exec:java
-    ```
 
 ### Deployment
 
 To deploy the app, you'll need to change the `<googleCloudProjectId>` value in [`pom.xml`](pom.xml#L19) to your Google Cloud Project and then run:
 
-    ```sh
     mvn package appengine:deploy
-    ```
