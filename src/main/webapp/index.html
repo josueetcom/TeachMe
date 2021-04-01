@@ -17,5 +17,22 @@
       <button onclick="addRandomGreeting()">Hello</button>
       <div id="greeting-container"></div>
     </div>
+
+    <div id="profileCreator">
+      <h3>Create Profile</h3>
+      <form action="/submitForm" method="POST">
+        <input type="text" id="name" placeholder="name" name="name" />
+        <br />
+        <input type="text" id="email" placeholder="email" name="email" />
+        <br />
+        <input type="text" id="bio" placeholder="bio" name="bio" />
+        <br />
+        <input type="text" id="wishlist" placeholder="my skills are..." name="wishlist" />
+        <br />
+        <input type="text" id="socialInfo" placeholder="my contact info is..." name="socialInfo" />
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
   </body>
 </html>
