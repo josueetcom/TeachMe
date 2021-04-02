@@ -15,11 +15,11 @@ If you use Google Cloud Shell, these are already installed.
 
 1. Clone the repo.
 
-   git clone https://github.com/josueetcom/TeachMe.git
+       git clone https://github.com/josueetcom/TeachMe.git
 
 2. `cd` into the repo and setup pre-commit hooks by running:
 
-   npm install
+       npm install
 
 ### Development
 
