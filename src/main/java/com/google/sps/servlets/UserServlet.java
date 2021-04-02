@@ -15,6 +15,10 @@ import org.jsoup.safety.Whitelist;
 @WebServlet("/users")
 public class UserServlet extends HttpServlet {
 
+    // create new datastore and keyfactory 
+    Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+    KeyFactory keyFactory = datastore.newKeyFactory();
+
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException { // create
 
@@ -24,10 +28,6 @@ public class UserServlet extends HttpServlet {
         String bio = Jsoup.clean(request.getParameter("bio"), Whitelist.none());
         String wishlist = Jsoup.clean(request.getParameter("wishlist"), Whitelist.none());
         String socialInfo = Jsoup.clean(request.getParameter("socialInfo"), Whitelist.none());
-
-        // create new datastore and keyfactory 
-        Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
-        KeyFactory keyFactory = datastore.newKeyFactory();
 
         // add kind users to keyfactory
         keyFactory.setKind("users");
@@ -51,15 +51,23 @@ public class UserServlet extends HttpServlet {
     public void doGet() { // read
 
 
-    }
+    }*/
 
     @Override
-    public void doPut() { // update
+    public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException  { // update
+        // get form information
+        String name = Jsoup.clean(request.getParameter("name-update"), Whitelist.none());
+        String email = Jsoup.clean(request.getParameter("email-update"), Whitelist.none());
+        String bio = Jsoup.clean(request.getParameter("bio-update"), Whitelist.none());
+        String wishlist = Jsoup.clean(request.getParameter("wishlist-update"), Whitelist.none());
+        String socialInfo = Jsoup.clean(request.getParameter("socialInfo-update"), Whitelist.none());
 
+         // add kind users to keyfactory
+        keyFactory.setKind("users");
 
     }
 
-    @Override
+    /*@Override
     public void doDelete() { // delete
 
     }*/
