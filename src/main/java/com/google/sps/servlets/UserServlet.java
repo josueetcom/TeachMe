@@ -10,11 +10,11 @@ import javax.servlet.http.*;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
-@WebServlet("/user")
+@WebServlet("/users")
 public class UserServlet extends HttpServlet{
 
     @Override
-    public void doPost(){ // create
+    public void doPost() { // create
 
         // get form information
         String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
@@ -25,19 +25,19 @@ public class UserServlet extends HttpServlet{
     }
 
     @Override
-    public void doGet(){ // read
+    public void doGet() { // read
 
 
     }
 
     @Override
-    public void doPut(){ // update
+    public void doPut() { // update
 
 
     }
 
     @Override
-    public void doDelete(){ // delete
+    public void doDelete() { // delete
 
     }
 }
