@@ -1,0 +1,10 @@
+.card {
+  height: 350px;
+  width: 250px;
+  border: solid rgb(236, 236, 236) 1px;
+  border-radius: 20px;
+}
+
+/* .card-md{
+
+} */

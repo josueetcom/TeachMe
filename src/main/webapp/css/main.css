@@ -1,0 +1,195 @@
+/* ------------------ */
+/* Default Selector styling */
+/* ------------------ */
+* {
+  box-sizing: border-box;
+}
+
+a,
+.menu-section > *,
+button > * {
+  transition: all ease-in-out 0.1s;
+}
+
+img {
+  width: 25px;
+  height: 25px;
+  /* background-color: rgb(21, 173, 59); */
+  /* border: solid black 1px; */
+  margin: 0 10px;
+}
+
+#profile-icon {
+  width: 40px;
+  height: 40px;
+  background: none;
+  margin-right: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: inherit;
+}
+
+/* ------------------ */
+/* Content Grid styling */
+/* ------------------ */
+.grid {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  height: auto;
+}
+
+/* ------------------ */
+/* Menu styling */
+/* ------------------ */
+.menu {
+  position: fixed;
+  width: 230px;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-right: solid rgb(236, 236, 236) 1px;
+}
+
+.menu-profile {
+  height: 60px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  /* border-bottom: solid rgb(236, 236, 236) 1px; */
+}
+
+.menu-section {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 0 40px 0;
+  border-top: solid rgb(236, 236, 236) 1px;
+}
+
+.menu-banner {
+  width: calc(100vw - 230px);
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 40px;
+  background: red;
+  border-bottom: solid rgb(236, 236, 236) 1px;
+}
+/* Inner Menu styling */
+/* ------------------ */
+
+h6.section-header {
+  width: 100%;
+  /* height: 30px; */
+  display: flex;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 0 8px 18px;
+  margin: 0;
+}
+#profile-username {
+  width: 100%;
+  /* height: 30px; */
+  display: flex;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 10px;
+  margin: 0;
+}
+
+.menu-tab {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  /* border: solid rgb(114, 114, 114) 1px; */
+  background: none;
+  color: rgb(143, 143, 143);
+  padding: 0 10px;
+}
+.menu-tab > a {
+  font-size: 15px;
+}
+.menu-tab:hover {
+  background: rgb(238, 238, 238);
+}
+
+.menu-item {
+  width: 100%;
+  height: 35px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  /* border: solid black; */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgb(139, 139, 139);
+  padding: 0 10px;
+}
+
+button {
+  position: relative;
+  border: solid rgb(145, 145, 145) 2px;
+  outline: none;
+  border-radius: 3px;
+  overflow: hidden;
+  /* background: none; */
+}
+button.menu-button {
+  width: 80%;
+  height: 40px;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  border: solid rgb(221, 221, 221) 1px;
+  color: rgb(131, 131, 131);
+  margin: 5px 0;
+}
+
+button.menu-button div#btn-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: -1;
+  background: linear-gradient(to right, #ff0000, #ffa800);
+}
+
+button.menu-button:hover div#btn-gradient {
+  opacity: 1;
+}
+
+button.no-border {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: none;
+  font-weight: 600;
+  color: rgb(63, 63, 63);
+}
