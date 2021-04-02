@@ -9,6 +9,8 @@ import com.google.cloud.datastore.Key;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
+
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
@@ -28,13 +30,15 @@ public class UserServlet extends HttpServlet {
         String bio = Jsoup.clean(request.getParameter("bio"), Whitelist.none());
         String wishlist = Jsoup.clean(request.getParameter("wishlist"), Whitelist.none());
         String socialInfo = Jsoup.clean(request.getParameter("socialInfo"), Whitelist.none());
+        String password = Jsoup.clean(request.getParameter("password"), Whitelist.none());
+        String ACC_ID = email+password;
 
         // add kind users to keyfactory
         keyFactory.setKind("users");
 
         // take the user elements and create a new entity object for it 
         FullEntity userEntity =
-          Entity.newBuilder(keyFactory.newKey())
+          Entity.newBuilder(keyFactory.newKey(ACC_ID))
               .set("name", name)
               .set("email", email)
               .set("bio", bio)
@@ -61,10 +65,7 @@ public class UserServlet extends HttpServlet {
         String bio = Jsoup.clean(request.getParameter("bio-update"), Whitelist.none());
         String wishlist = Jsoup.clean(request.getParameter("wishlist-update"), Whitelist.none());
         String socialInfo = Jsoup.clean(request.getParameter("socialInfo-update"), Whitelist.none());
-
-         // add kind users to keyfactory
-        keyFactory.setKind("users");
-
+        String password = Jsoup.clean(request.getParameter("password"), Whitelist.none());
     }
 
     /*@Override
