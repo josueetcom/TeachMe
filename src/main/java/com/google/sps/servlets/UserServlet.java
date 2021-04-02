@@ -15,6 +15,10 @@ import org.jsoup.safety.Whitelist;
 @WebServlet("/users")
 public class UserServlet extends HttpServlet {
 
+    // create new datastore and keyfactory 
+    Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+    KeyFactory keyFactory = datastore.newKeyFactory();
+
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException { // create
 
@@ -24,10 +28,6 @@ public class UserServlet extends HttpServlet {
         String bio = Jsoup.clean(request.getParameter("bio"), Whitelist.none());
         String wishlist = Jsoup.clean(request.getParameter("wishlist"), Whitelist.none());
         String socialInfo = Jsoup.clean(request.getParameter("socialInfo"), Whitelist.none());
-
-        // create new datastore and keyfactory 
-        Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
-        KeyFactory keyFactory = datastore.newKeyFactory();
 
         // add kind users to keyfactory
         keyFactory.setKind("users");
