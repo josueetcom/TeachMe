@@ -3,7 +3,7 @@
   "overrides": [
     {
       "files": ["*.html"],
-      "options": {"singleQuote": false}
+      "options": { "singleQuote": false }
     }
   ]
 }
