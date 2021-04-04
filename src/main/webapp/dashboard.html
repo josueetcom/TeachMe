@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- ========================================================
+        Menu
+         ======================================================== -->
+    <div class="menu">
+      <div class="profile-bar">
+        <img
+          class="img-small"
+          src="./assets/svgs/account.svg"
+          alt="User profile image"
+        />
+        <a href="./userprofile.html" id="user-profile">Username</a>
+      </div>
+
+      <div class="menu-item">
+        <img
+          class="img-extrasmall"
+          src="./assets/svgs/menu.svg"
+          alt="All users icon"
+          style="margin-right: 8px"
+        />
+        <a href="./dashboard.html">All Users</a>
+      </div>
+
+      <div class="menu-item">
+        <img
+          class="img-extrasmall"
+          src="./assets/svgs/search.svg"
+          alt="Search topics icon"
+          style="margin-right: 8px"
+        />
+        <a href="/">Search by Topic</a>
+      </div>
+
+      <div class="menu-header" id="matches">Matches</div>
+
+      <div class="menu-bucket" id="matches-bucket">
+        <div class="menu-item">
+          <img
+            class="img-extrasmall"
+            src="./assets/svgs/account.svg"
+            alt="User partner match icon"
+          />
+          <a href="/">Username</a>
+        </div>
+      </div>
+
+      <div class="menu-header" id="wishlist">Topic Wishlist</div>
+
+      <div class="menu-bucket" id="wishlist-bucket">
+        <div class="menu-item">Item</div>
+      </div>
+
+      <div class="menu-header" id="teachlist">Topic Teachlist</div>
+
+      <div class="menu-bucket" id="teachlist-bucket">
+        <div class="menu-item">Item</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="header">
+        <h3 class="header-title">Username</h3>
+      </div>
+
+      <div class="content" id="content-dashboard">
+        <div class="profile-grid">
+          <div class="card homepage-card">
+            <div class="card-banner">
+              <a href=""><h3>Username</h3></a>
+
+              <div class="user-teachlist" id="card-list">
+                <div class="tag">Tag</div>
+                <div class="tag">Tag</div>
+                <div class="tag">Tag</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card"></div>
+          <div class="card"></div>
+          <div class="card"></div>
+          <div class="card"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- ========================================================
+        Menu
+         ======================================================== -->
+    <div class="menu">
+      <div class="profile-bar">
+        <img class="img-small" src="./assets/svgs/account.svg" alt="" />
+        <a href="" id="user-profile">Username</a>
+      </div>
+
+      <div class="menu-item">
+        <img
+          class="img-extrasmall"
+          src="./assets/svgs/menu.svg"
+          alt=""
+          style="margin-right: 8px"
+        />
+        <a href="" id="user-profile">All Users</a>
+      </div>
+
+      <div class="menu-item">
+        <img
+          class="img-extrasmall"
+          src="./assets/svgs/search.svg"
+          alt=""
+          style="margin-right: 8px"
+        />
+        <a href="" id="user-profile">Search by Topic</a>
+      </div>
+
+      <div class="menu-header" id="matches">Matches</div>
+
+      <div class="menu-bucket" id="matches-bucket">
+        <div class="menu-item">
+          <img class="img-extrasmall" src="./assets/svgs/account.svg" alt="" />
+          <a href="" id="user-profile">Username</a>
+        </div>
+      </div>
+
+      <div class="menu-header" id="wishlist">Topic Wishlist</div>
+
+      <div class="menu-bucket" id="wishlist-bucket">
+        <div class="menu-item">Item</div>
+      </div>
+
+      <div class="menu-header" id="teachlist">Topic Teachlist</div>
+
+      <div class="menu-bucket" id="teachlist-bucket">
+        <div class="menu-item">Item</div>
+      </div>
+    </div>
+
+    <!-- Main content section -->
+    <div class="grid">
+      <div class="header">
+        <h3 class="header-title">Your Profile</h3>
+      </div>
+
+      <div class="content" id="content-userprofile">
+        <div class="card userprofile-card">
+          <h1>* Update Profile</h1>
+
+          <form action="">
+            <h4>Bio</h4>
+            <input type="text" />
+
+            <h4>Email</h4>
+            <input type="text" />
+
+            <h4>Discord</h4>
+            <input type="text" />
+
+            <h4>Social</h4>
+            <input type="text" />
+
+            <h4>Wishlist</h4>
+            <input type="text" placeholder="Enter comma separtated topics " />
+
+            <h4>Teachlist</h4>
+            <input type="text" placeholder="Enter comma separtated topics " />
+
+            <button style="margin-top: 1rem">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
