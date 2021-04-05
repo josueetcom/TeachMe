@@ -1,49 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="./css/style.css"></script>
+      <meta charset="UTF-8" />
+      <title>TeachMe</title>
+      <link rel="stylesheet" href="css/style.css" />
+      <meta name="google-signin-scope" content="profile email">
+      <meta name="google-signin-client_id"
+          content="1035706731936-or6dfdke3nqhppaosd07lrjche5btjqo.apps.googleusercontent.com">
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+      <script src="script.js"></script>
   </head>
   <body>
-    <div id="content">
-      <h1>Teachme</h1>
-      <p>This is teachme a p2p learning platform.</p>
-      <p>
-        Click <a href="/hello">here</a> to see content created by server code.
-      </p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-      <a href="./dashboard.html">Click here to get the the TeachMe dashboard</a>
-    </div>
 
-    <div id="profileCreator">
-      <h3>Create Profile</h3>
-      <form action="/users" method="POST">
-        <input type="text" id="name" placeholder="name" name="name" />
-        <br />
-        <input type="text" id="email" placeholder="email" name="email" />
-        <br />
-        <input type="text" id="bio" placeholder="bio" name="bio" />
-        <br />
-        <input
-          type="text"
-          id="wishlist"
-          placeholder="my skills are..."
-          name="wishlist"
-        />
-        <br />
-        <input
-          type="text"
-          id="socialInfo"
-          placeholder="my contact info is..."
-          name="socialInfo"
-        />
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
+      <img id="logoup" src="assets/svgs/logo-with-title.svg" alt="logo-with-title"> 
+      <div class = "cs" id="centersquare">
+        <img id="logosq" src="assets/svgs/logo-with-title.svg" alt="logo-with-title"> 
+        <p id="wt">Welcome to <br> Teachme<p>
+        <img id="google" src="assets/svgs/google-logo.png" alt="google">
+        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+      </div>
   </body>
 </html>
