@@ -398,6 +398,7 @@ simple mistaak .img-extrasmall {
 }
 
 .cs{
+  box-shadow: -8px 4px 15px 0 grey;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -407,25 +408,24 @@ simple mistaak .img-extrasmall {
   text-align: center;
   margin: 2vh;
   padding: 5vh;
-  box-shadow: -8px 4px 15px 0 grey;
 }
 
 
 #logosq{
-  width: 8vw;
   height: 8vh;
+  width: 8vw;
 }
 
 #google{
-  width: 5vw;
   height: 10vh;
+  width: 5vw;
 
 }
 
 #wt{
-font-size: xx-large;
-margin: 0px;
-font-weight:900;
+  font-size: xx-large;
+  font-weight:900;
+  margin: 0px;
 }
 
 .g-signin2{
