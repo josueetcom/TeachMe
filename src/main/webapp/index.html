@@ -21,12 +21,13 @@
     <div id="profileCreator">
       <h3>Create Profile</h3>
       <form action="/users" method="POST">
+        <input type="hidden" name="_method" value="POST" />
         <input type="text" id="name" placeholder="name" name="name" />
         <br />
-        <input type="text" id="email" placeholder="email" name="email" />
+        <input type="email" id="email" placeholder="email" name="email" />
         <br />
         <input
-          type="text"
+          type="password"
           id="password"
           placeholder="password"
           name="password"
@@ -42,7 +43,7 @@
         />
         <br />
         <input
-          type="text"
+          type="tel"
           id="socialInfo"
           placeholder="my contact info is..."
           name="socialInfo"
@@ -52,23 +53,24 @@
       </form>
 
       <h3>Update Profile Information</h3>
-      <form action="/users" method="PUT">
+      <form action="/users" method="POST">
+        <input type="hidden" name="_method" value="PUT" />
         <input
           type="text"
           id="name-update"
           placeholder="update name"
-          name="name"
+          name="name-update"
         />
         <br />
         <input
-          type="text"
-          id="email-update"
-          placeholder="update email"
+          type="email"
+          id="email"
+          placeholder="original email"
           name="email"
         />
         <br />
         <input
-          type="text"
+          type="password"
           id="password"
           placeholder="original password"
           name="password"
@@ -78,21 +80,62 @@
           type="text"
           id="bio-update"
           placeholder="update bio"
-          name="bio"
+          name="bio-update"
         />
         <br />
         <input
           type="text"
           id="wishlist-update"
           placeholder="my updated skills are..."
-          name="wishlist"
+          name="wishlist-update"
         />
         <br />
         <input
-          type="text"
+          type="tel"
           id="socialInfo-update"
           placeholder="my updated contact info is..."
-          name="socialInfo"
+          name="socialInfo-update"
+        />
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+      <br />
+      <br />
+      <h3>Get User Info</h3>
+      <form action="/users" method="GET">
+        <input type="hidden" name="_method" value="GET" />
+        <input
+          type="email"
+          id="email"
+          placeholder="original email"
+          name="email"
+        />
+        <br />
+        <input
+          type="password"
+          id="password"
+          placeholder="original password"
+          name="password"
+        />
+        <br />
+        <input type="submit" value="Submit" />
+      </form>
+
+      <h3>Delete User Info</h3>
+      <form action="/users" method="GET">
+        <input type="hidden" name="_method" value="DELETE" />
+        <input
+          type="email"
+          id="email"
+          placeholder="original email"
+          name="email"
+        />
+        <br />
+        <input
+          type="password"
+          id="password"
+          placeholder="original password"
+          name="password"
         />
         <br />
         <input type="submit" value="Submit" />
