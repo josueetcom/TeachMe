@@ -89,6 +89,10 @@ public class UserServlet extends HttpServlet {
 
         //take entity information and turn it into json
         String json = gson.toJson(user);
+
+        //needs a fetch method in javascript to utilize
+
+        response.sendRedirect("index.html");
     }
 
     @Override
@@ -136,6 +140,7 @@ public class UserServlet extends HttpServlet {
         keyFactory.setKind("users");
         Key userKey = keyFactory.newKey(ACC_ID);
         datastore.delete(userKey);
+        response.sendRedirect("index.html");
         return;
     }
 }
