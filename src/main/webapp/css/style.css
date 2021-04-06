@@ -390,4 +390,48 @@ simple mistaak .img-extrasmall {
 .img-large {
   width: 100px;
 }
-/*# sourceMappingURL=style.css.map */
+
+#logoup{
+
+  padding-top: 2vh;
+  padding-left: 2vh;
+}
+
+.cs{
+  box-shadow: -8px 4px 15px 0 grey;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  background-color: lightgray;
+  text-align: center;
+  margin: 2vh;
+  padding: 5vh;
+}
+
+
+#logosq{
+  height: 8vh;
+  width: 8vw;
+}
+
+#google{
+  height: 10vh;
+  width: 5vw;
+
+}
+
+#wt{
+  font-size: xx-large;
+  font-weight:900;
+  margin: 0px;
+}
+
+.g-signin2{
+  width: 100%;
+}
+
+.g-signin2 > div{
+  margin: 0 auto;
+}
