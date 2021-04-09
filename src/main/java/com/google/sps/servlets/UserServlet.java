@@ -6,7 +6,11 @@ import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.FullEntity;
 import com.google.cloud.datastore.KeyFactory;
 import com.google.cloud.datastore.Value;
+import com.google.cloud.datastore.Query;
+import com.google.cloud.datastore.QueryResults;
+import com.google.cloud.datastore.StructuredQuery.OrderBy;
 import com.google.gson.Gson;
+import com.google.sps.data.User;
 import com.google.cloud.datastore.Key;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -14,6 +18,8 @@ import java.io.*;
 import java.util.Collection;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.List;
+
 
 
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -67,7 +73,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException { // read
-        
+
         String method = request.getParameter("_method").toString();
 
         // change method if it is a put request
@@ -76,23 +82,26 @@ public class UserServlet extends HttpServlet {
           return;
         }
 
-        //get for information
-        String email = Jsoup.clean(request.getParameter("email"), Whitelist.none());
-        String password = Jsoup.clean(request.getParameter("password"), Whitelist.none());
-        String ACC_ID = email+password;
-        Gson gson = new Gson();        
+        response.setContentType("json");
+        Gson gson = new Gson();
 
-        //create a key to access the entity 
-        keyFactory.setKind("users");
-        Key userKey = keyFactory.newKey(ACC_ID);
-        String user = datastore.get(userKey).getProperties().values().toString();
+        Query<Entity> query =
+           Query.newEntityQueryBuilder().setKind("users").setOrderBy(OrderBy.desc("name")).build();
+        QueryResults<Entity> results = datastore.run(query);  
 
-        //take entity information and turn it into json
-        String json = gson.toJson(user);
+        List<User> users = new ArrayList<>();
+        while (results.hasNext()) {
+          Entity entity = results.next();
 
-        //needs a fetch method in javascript to utilize
+          String u_name = entity.getString("name");
+          String u_email = entity.getString("email");
+          String u_wishlist = entity.getString("wishlist");
 
-        response.sendRedirect("index.html");
+          User u_user = new User(u_name, u_email, u_wishlist);
+          users.add(u_user);
+
+          response.getWriter().println(u_user);
+        }        
     }
 
     @Override

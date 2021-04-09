@@ -30,3 +30,15 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+$('#my-form').submit(function (e) {
+  //on a form, when you click submit it will run this
+  e.preventDefault();
+  $.ajax({
+    url: '/form-handler',
+    type: 'post',
+    data: $('#my-form').serialize(), //info from my form
+  }).done(function () {
+    document.getElementById('txt').value = '';
+  });
+});
