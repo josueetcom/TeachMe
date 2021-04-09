@@ -19,7 +19,7 @@ function onSignIn(googleUser) {
   document.getElementById('email').innerHTML = profile.getEmail();
 }
 
-function Switch() {
+function toggleContent() {
   if (counter == 0) {
     document.getElementById('content-userprofile').style.display = 'flex';
     document.getElementById('content-dashboard').style.display = 'none';
