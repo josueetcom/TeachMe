@@ -24,7 +24,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 import java.lang.String;
 
-
+// Try typing "/chats" or "/chats?userid=Elijah" or "/chats?chatid=someid"
+// to see how the query parameters work for the servlet
 @WebServlet(urlPatterns = {"/chats/*"})
 public class ChatServlet extends HttpServlet {
 
@@ -32,7 +33,7 @@ public class ChatServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String endpoint = request.getPathInfo();
     String chatid = request.getParameter("chatid");
-    String userid = request.getParameter("participantid");
+    String userid = request.getParameter("userid");
     response.getWriter().println("Chat servlet working\n");
     response.getWriter().println("Endpoint: " + endpoint);
     response.getWriter().println("ChatID: " + chatid);
