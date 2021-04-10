@@ -19,6 +19,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Dashboard</title>
     <script src="script.js"></script>
+    <script src="createUsers.js"></script>
   </head>
 
   <body>
@@ -107,6 +108,7 @@
           <form id="my-form2" action="/users" method="POST">
             <input type="hidden" name="email" id="post_email" />
             <input type="hidden" name="id" id="post_id" />
+            <input type="hidden" name="name" id="post_name" />
             <input type="hidden" name="NOTHING" id="NOTHING" value="" />
             <textarea
               id="txt2"
@@ -132,7 +134,7 @@
         </div>
       </div>
       <div class="content" id="content-dashboard">
-        <div class="profile-grid">
+        <div class="profile-grid" id="profile-grid">
           <div class="card homepage-card">
             <div class="card-banner">
               <a href="">
@@ -151,6 +153,11 @@
           <div class="card"></div>
           <div class="card"></div>
           <div class="card"></div>
+        </div>
+        <div>
+          <form action="/users" method="GET">
+            <button type="submit">Update Users</button>
+          </form>
         </div>
       </div>
     </div>
