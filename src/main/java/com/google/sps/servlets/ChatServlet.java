@@ -6,8 +6,11 @@ import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.Query;
 import com.google.cloud.datastore.QueryResults;
 import com.google.cloud.datastore.StructuredQuery.OrderBy;
+import com.google.cloud.datastore.Key;
+import com.google.cloud.datastore.KeyFactory;
 import com.google.gson.Gson;
-import main.java.com.google.sps.data.Chat;
+import com.google.sps.data.Chat;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.ArrayList;
@@ -34,7 +37,7 @@ public class ChatServlet extends HttpServlet {
     response.getWriter().println("Endpoint: " + endpoint);
     response.getWriter().println("ChatID: " + chatid);
     response.getWriter().println("UserID: " + userid);
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
 
     Gson gson = new Gson();
     //Get all chats that belong to the user to put in the menu
