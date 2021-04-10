@@ -17,6 +17,8 @@ function onSignIn(googleUser) {
   document.getElementById('headert').innerHTML =
     profile.getGivenName() + ' ' + profile.getFamilyName();
   document.getElementById('email').innerHTML = profile.getEmail();
+  document.getElementById('post_email').value = profile.getEmail();
+  document.getElementById('post_id').value = profile.getId().toString();
 }
 
 function toggleContent() {
