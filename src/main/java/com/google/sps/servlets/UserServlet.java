@@ -1,6 +1,7 @@
 package com.google.sps.servlets;
 
 import com.google.cloud.datastore.Datastore;
+import com.google.cloud.datastore.DatastoreException;
 import com.google.cloud.datastore.DatastoreOptions;
 import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.FullEntity;
@@ -22,39 +23,80 @@ public class UserServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException { // create
 
-        // get form information
-        String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
-        String email = Jsoup.clean(request.getParameter("email"), Whitelist.none());
-        String bio = Jsoup.clean(request.getParameter("bio"), Whitelist.none());
-        String wishlist = Jsoup.clean(request.getParameter("wishlist"), Whitelist.none());
-        String socialInfo = Jsoup.clean(request.getParameter("socialInfo"), Whitelist.none());
+      String button_type = request.getParameter("submission").toString();
+      if(button_type == "update"){
+        this.doPut(request, response);
+        return;
+      }
 
-        // add kind users to keyfactory
-        keyFactory.setKind("users");
+      // get form information
+      String NOTHING = Jsoup.clean(request.getParameter("NOTHING"), Whitelist.none());
+      String email = Jsoup.clean(request.getParameter("email"), Whitelist.none());
+      String wishlist = Jsoup.clean(request.getParameter("wishlist"), Whitelist.none());
+      String teachlist = Jsoup.clean(request.getParameter("teachlist"), Whitelist.none());
+      String id = Jsoup.clean(request.getParameter("id"), Whitelist.none());
 
-        // take the user elements and create a new entity object for it 
-        FullEntity userEntity =
-          Entity.newBuilder(keyFactory.newKey())
-              .set("name", name)
-              .set("email", email)
-              .set("bio", bio)
-              .set("wishlist", wishlist)
-              .set("socialInfo", socialInfo)
-              .build();
-        
-        // insert that new entity
+      // add kind users to keyfactory
+      keyFactory.setKind("users");
+
+      // take the user elements and create a new entity object for it 
+      FullEntity userEntity =
+        Entity.newBuilder(keyFactory.newKey(id))
+            .set("email", email)
+            .set("wishlist", wishlist)
+            .set("teachlist", teachlist)
+            .build();
+      
+      // insert that new entity
+      try{
         datastore.add(userEntity);
-        response.sendRedirect("index.html");
+      }
+      catch(Exception DatastoreException){
+        this.doPut(request, response);
+        return;
+      }
+      response.sendRedirect("index.html");
+    }
+
+
+    @Override
+    public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException  { // update
+        
+      // get form information
+      String NOTHING = Jsoup.clean(request.getParameter("NOTHING"), Whitelist.none());
+      String email = Jsoup.clean(request.getParameter("email"), Whitelist.none());
+      String wishlist = Jsoup.clean(request.getParameter("wishlist"), Whitelist.none());
+      String teachlist = Jsoup.clean(request.getParameter("teachlist"), Whitelist.none());
+      String id = Jsoup.clean(request.getParameter("id"), Whitelist.none());
+
+      //access the original entity
+      keyFactory.setKind("users");
+      Key userKey = keyFactory.newKey(id);
+      Entity user = datastore.get(userKey);
+
+      if(wishlist.equals(NOTHING)){
+          wishlist = user.getString("wishlist");
+      }
+      if(teachlist.equals(NOTHING)){
+          teachlist = user.getString("teachlist");
+      }
+
+      // take the user elements and create a new updated entity object for it 
+      FullEntity userUpdatedEntity =
+        Entity.newBuilder(user)
+            .set("email", email)
+            .set("wishlist", wishlist)
+            .set("teachlist", teachlist)
+            .build();
+
+      //update the information in the original entity
+      datastore.put(userUpdatedEntity);
+      response.sendRedirect("index.html");
+      return;
     }
 
     /*@Override
     public void doGet() { // read
-
-
-    }
-
-    @Override
-    public void doPut() { // update
 
 
     }

@@ -30,10 +30,10 @@ public final class Chat {
 
   private long id;
   private String participants;//A comma separated string of participants
-  private List<String> messages;
+  private String messages;//A comma separated string of messages
 
   //Constructor 1
-  Chat(long id, String participants, List<String> messages) {
+  Chat(long id, String participants, String messages) {
     this.id = id;
     this.participants = participants;
     this.messages = messages;
@@ -46,8 +46,8 @@ public final class Chat {
     // this.messages = entity.getProperty("messages");
   }
 
-  public static Chat getChat(Datastore datastore, String chatid) {
-    Key key = datastore.newKeyFactory().setKind("Chat").newKey(chatid);
+  public static Chat getUserChat(Datastore datastore, String chatid) {
+    Key key = datastore.newKeyFactory().setKind("chat").newKey(chatid);
 
     try {
       Entity entity = datastore.get(key);
@@ -58,38 +58,64 @@ public final class Chat {
     }
   }
 
-  public static List<Chat> getChats(Datastore datastore, String participantid) {
+  public static List<Chat> getUserChats(Datastore datastore, String participantid) {
     
     List<Chat> chats = new ArrayList<>();
-    Query<Entity> chatQuery = Query
-    .newEntityQueryBuilder()
-    .setKind("Chat")
-    .build();
+    Query<Entity> chatQuery = Query.newEntityQueryBuilder().setKind("chat").build();
     QueryResults<Entity> chatEntities = datastore.run(chatQuery);
 
-    // Iterate through the chats
-    // for (Entity entity : chatEntities.asIterable()) {
-    //   long chatid = entity.getKey.getId();
-    //   List<String> participantList = Arrays.asList(entity.getProperty("participants").split(","));
+    while(chatEntities.hasNext()){
+        Entity entity = chatEntities.next();
+        String participants = entity.getString("participants");
+        List<String> participantList = Arrays.asList(participants.split(","));
 
-    //   if (participantList.contains(participantid)){
-    //     Chat chat = new Chat(entity);
-    //     chats.add(chat);
-    //   }
-    // }
+        if (participantList.contains(participantid)){
+            Chat chat = new Chat(entity);
+            chats.add(chat);
+        }
+    }
     return chats;
   }
 
+  public static List<Chat> getAllChats(Datastore datastore) {
+    
+    List<Chat> chats = new ArrayList<>();
+    Query<Entity> chatQuery = Query.newEntityQueryBuilder().setKind("chat").build();
+    QueryResults<Entity> chatEntities = datastore.run(chatQuery);
 
-  long getId(){
+    while(chatEntities.hasNext()){
+        Entity entity = chatEntities.next();
+        Chat chat = new Chat(entity);
+        chats.add(chat);
+    }
+    return chats;
+  }
+
+  public long getId(){
     return id;
   }
 
-  String getParticipants(){
+  public String getParticipants(){
     return participants;
   }
 
-  List<String> getMessages(){
+  public String getMessages(){
     return messages;
+  }
+
+  public static boolean chatExists(Datastore datastore, String participantId1, String participantId2){
+    List<Chat> chats = Chat.getAllChats(datastore);
+    ListIterator<Chat> chatsIterator = chats.listIterator();
+    String participants;
+
+    while(chatsIterator.hasNext()){
+        Chat chat = chatsIterator.next();
+        participants = chat.getParticipants();
+        if(participants.contains(participantId1) || participants.contains(participantId2)){
+            return true;
+        }
+    }
+
+    return false;
   }
 }
