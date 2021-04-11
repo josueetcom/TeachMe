@@ -1,16 +1,27 @@
+class User {
+  constructor(name, email, wishlist, teachlist) {
+    this.name = name;
+    this.email = email;
+    this.wishlist = wishlist;
+    this.teachlist = teachlist;
+  }
+}
+
 async function usersFetch() {
   //add a new user onto the dashboard based on how many are returned
   const users = await fetch('/users');
   const userDashboard = document.getElementById('profile-grid');
   console.log('here');
   users.forEach((user) => {
-    userDashboard.appendChild(createUserCard(user));
+    console.log(user);
+    let userObj = new User(user);
+    userDashboard.appendChild(createUserCard(userObj));
     console.log('user checked');
   });
 }
 
 //create a user template
-function createUserCard(user) {
+function createUserCard(userObj) {
   //make an empty card element
   const UserCard = document.createElement('div');
   UserCard.className = 'card';
@@ -22,7 +33,7 @@ function createUserCard(user) {
   //create the name banner
   const nameBanner = document.createElement('a');
   const name = document.createElement('h3');
-  name.innerText = user.name;
+  name.innerText = userObj.name;
   nameBanner.appendChild(name);
 
   //create the teachlist categories

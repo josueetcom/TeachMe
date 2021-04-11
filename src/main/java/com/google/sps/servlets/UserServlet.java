@@ -12,6 +12,8 @@ import com.google.cloud.datastore.QueryResults;
 import com.google.cloud.datastore.StructuredQuery.OrderBy;
 import com.google.gson.Gson;
 import com.google.sps.data.User;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
@@ -124,7 +126,7 @@ public class UserServlet extends HttpServlet {
 
           User u_user = new User(u_name, u_email, u_wishlist, u_teachlist);
           users.add(u_user);
-          response.getWriter().println(u_user.toString());
+          //response.getWriter().println(u_user.toString());
         }       
     }
 
