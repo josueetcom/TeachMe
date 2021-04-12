@@ -33,7 +33,7 @@ public final class Chat {
   private String messages;//A comma separated string of messages
 
   //Constructor 1
-  Chat(long id, String participants, String messages) {
+  Chat(long id, List<String> participants, List<String> messages) {
     this.id = id;
     this.participants = participants;
     this.messages = messages;
