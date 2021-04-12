@@ -30,7 +30,7 @@ public final class Chat {
 
   private long id;
   private List<String> participants;
-  private String messages;//A comma separated string of messages
+  private List<String> messages;
 
   //Constructor 1
   Chat(long id, List<String> participants, List<String> messages) {
