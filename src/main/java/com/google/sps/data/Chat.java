@@ -29,7 +29,7 @@ import java.lang.String;
 public final class Chat {
 
   private long id;
-  private String participants;//A comma separated string of participants
+  private List<String> participants;
   private String messages;//A comma separated string of messages
 
   //Constructor 1
