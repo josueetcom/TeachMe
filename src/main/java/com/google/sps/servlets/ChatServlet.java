@@ -72,7 +72,7 @@ public class ChatServlet extends HttpServlet {
     //   String userid = Jsoup.clean(request.getParameter("id"), Whitelist.none());
       String userid = "115545090202496645724"; // Test id 1
     //   String partnerid = Jsoup.clean(request.getParameter("partnerid"), Whitelist.none());
-      String partnerid = "104737820262548186234"; //Test id 2
+      String partnerId = "104737820262548186234"; // Test id 2
 
       // Creating the participants list - its ordered by whichever id is greater
       String participants;
@@ -108,5 +108,4 @@ public class ChatServlet extends HttpServlet {
     }
   
 }
-
 
