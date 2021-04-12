@@ -66,8 +66,7 @@ public final class Chat {
 
     while(chatEntities.hasNext()){
         Entity entity = chatEntities.next();
-        String participants = entity.getString("participants");
-        List<String> participantList = Arrays.asList(participants.split(","));
+        List<String> participantList = entity.getList("participants");
 
         if (participantList.contains(participantid)){
             Chat chat = new Chat(entity);
