@@ -29,8 +29,8 @@ import java.time.LocalDateTime;
 public final class Chat {
 
   private long id;
-  private List<StringValue> participants;
-  private List<StringValue> messages;
+  private List<String> participants;
+  private List<String> messages;
 
   //Constructor 1
   Chat(long id, List<StringValue> participants, List<StringValue> messages) {
