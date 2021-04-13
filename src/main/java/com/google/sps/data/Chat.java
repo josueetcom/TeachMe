@@ -6,9 +6,14 @@ import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.FullEntity;
 import com.google.cloud.datastore.Query;
 import com.google.cloud.datastore.QueryResults;
+import com.google.cloud.datastore.StructuredQuery.CompositeFilter;
+import com.google.cloud.datastore.StructuredQuery.PropertyFilter;
 import com.google.cloud.datastore.StructuredQuery.OrderBy;
 import com.google.cloud.datastore.Key;
 import com.google.cloud.datastore.KeyFactory;
+import com.google.cloud.datastore.IncompleteKey;
+import com.google.cloud.datastore.Value;
+import com.google.cloud.datastore.StringValue;
 import com.google.gson.Gson;
 import com.google.sps.data.Chat;
 
@@ -16,24 +21,17 @@ import java.io.IOException;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
 import java.lang.String;
 
 /** An item on a todo list. */
 public final class Chat {
 
   private long id;
-  private List<String> participants;
-  private List<String> messages;
+  private List<StringValue> participants;
+  private List<StringValue> messages;
 
   //Constructor 1
-  Chat(long id, List<String> participants, List<String> messages) {
+  Chat(long id, List<StringValue> participants, List<StringValue> messages) {
     this.id = id;
     this.participants = participants;
     this.messages = messages;
@@ -42,79 +40,123 @@ public final class Chat {
   // //Constructor 2
   Chat(Entity entity) {
     this.id = (long) entity.getKey().getId();
-    this.participants = entity.getString("participants");
-    // this.messages = entity.getProperty("messages");
+    this.participants = entity.getList("participants");
+    this.messages = entity.getList("messages");
+
   }
 
-  public static Chat getUserChat(Datastore datastore, String chatid) {
-    Key key = datastore.newKeyFactory().setKind("chat").newKey(chatid);
+    public static Chat newChat(Datastore datastore, String participantId1, String participantId2) {
+        boolean chat_exists = Chat.chatExists(datastore, participantId1, participantId2);
 
-    try {
-      Entity entity = datastore.get(key);
-      Chat c = new Chat(entity);
-      return c;
-    } catch (Exception e) {
-      return null;
+        if (chat_exists == true){
+            return null;
+        }
+
+        KeyFactory keyFactory = datastore.newKeyFactory().setKind("chat");
+        Key chatKey = datastore.allocateId(keyFactory.newKey());
+
+        Entity chatEntity = Entity.newBuilder(chatKey)
+            .set("participants", participantId1, participantId2)
+            .set("messages", "...Chat Start")
+            .build();
+
+        datastore.add(chatEntity);
+        System.out.println("Breakpoint");
+        Chat chat = new Chat(chatEntity);
+
+        return chat;
     }
-  }
 
-  public static List<Chat> getUserChats(Datastore datastore, String participantid) {
-    
-    List<Chat> chats = new ArrayList<>();
-    Query<Entity> chatQuery = Query.newEntityQueryBuilder().setKind("chat").build();
-    QueryResults<Entity> chatEntities = datastore.run(chatQuery);
+    public static Chat getChatById(Datastore datastore, String chatId) {
+        KeyFactory keyFactory = datastore.newKeyFactory().setKind("chat");
 
-    while(chatEntities.hasNext()){
-        Entity entity = chatEntities.next();
-        List<String> participantList = entity.getList("participants");
+        Query<Entity> query = Query.newEntityQueryBuilder()
+            .setKind("chat")
+            .setFilter(PropertyFilter.gt("__key__", keyFactory.newKey(chatId)))
+            .build();
 
-        if (participantList.contains(participantid)){
+        QueryResults<Entity> chatResults = datastore.run(query);
+
+        try {
+        Entity chat = chatResults.next();
+        Chat c = new Chat(chat);
+        System.out.println("Chat found");
+        return c;
+        } catch (Exception e) {
+        return null;
+        }
+    }
+
+    public static List<Chat> getChatsByUser(Datastore datastore, String participantId) {
+        
+        List<Chat> chats = new ArrayList<Chat>();
+        Query<Entity> chatQuery = Query.newEntityQueryBuilder().setKind("chat")
+        .setFilter(CompositeFilter.and(
+            PropertyFilter.eq("participants", participantId)))
+        .build();
+        QueryResults<Entity> chatEntities = datastore.run(chatQuery);
+
+        while(chatEntities.hasNext()){
+            Entity entity = chatEntities.next();
             Chat chat = new Chat(entity);
             chats.add(chat);
         }
+        return chats;
     }
-    return chats;
-  }
 
-  public static List<Chat> getAllChats(Datastore datastore) {
-    
-    List<Chat> chats = new ArrayList<>();
-    Query<Entity> chatQuery = Query.newEntityQueryBuilder().setKind("chat").build();
-    QueryResults<Entity> chatEntities = datastore.run(chatQuery);
+    public static List<Chat> getAllChats(Datastore datastore) {
+        
+        List<Chat> chats = new ArrayList<>();
 
-    while(chatEntities.hasNext()){
-        Entity entity = chatEntities.next();
-        Chat chat = new Chat(entity);
-        chats.add(chat);
+        Query<Entity> query = Query.newEntityQueryBuilder().setKind("chat").build();
+        QueryResults<Entity> chatEntities = datastore.run(query);
+
+        while(chatEntities.hasNext()){
+            Entity entity = chatEntities.next();
+            Chat chat = new Chat(entity);
+            chats.add(chat);
+        }
+        return chats;
     }
-    return chats;
-  }
 
-  public long getId(){
-    return id;
-  }
+    public static boolean chatExists(Datastore datastore, String participantId1, String participantId2){
+        Query<Entity> chatQuery = Query.newEntityQueryBuilder().setKind("chat")
+            .setFilter(CompositeFilter.and(PropertyFilter.eq("participants", participantId1), PropertyFilter.eq("participants", participantId2)))
+            .build();
+        QueryResults<Entity> chatEntities = datastore.run(chatQuery);
 
-  public String getParticipants(){
-    return participants;
-  }
+        if (chatEntities.hasNext()){
+            System.out.printf("-Chat Exists\n");
+            
+            while(chatEntities.hasNext()){
+                Entity entity = chatEntities.next();
+                System.out.println(entity.getList("participants"));
+            }  
 
-  public String getMessages(){
-    return messages;
-  }
-
-  public static boolean chatExists(Datastore datastore, String participantId1, String participantId2){
-    List<Chat> chats = Chat.getAllChats(datastore);
-    ListIterator<Chat> chatsIterator = chats.listIterator();
-    String participants;
-
-    while(chatsIterator.hasNext()){
-        Chat chat = chatsIterator.next();
-        participants = chat.getParticipants();
-        if(participants.contains(participantId1) || participants.contains(participantId2)){
             return true;
         }
+        else{
+            System.out.printf("-Chat Doesn't Exist\n");
+            
+            while(chatEntities.hasNext()){
+                Entity entity = chatEntities.next();
+                System.out.println(entity.getList("participants"));
+            }  
+
+            return false;
+        }        
     }
 
-    return false;
-  }
+    
+    public long getId(){
+        return id;
+    }
+
+    public List<StringValue> getParticipants(){
+        return participants;
+    }
+
+    public List<StringValue> getMessages(){
+        return messages;
+    }
 }
