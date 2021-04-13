@@ -132,6 +132,7 @@ public class UserServlet extends HttpServlet {
         response.setContentType("application/json;");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().println(json);
+        
         //maintians url and servlet info but doesn't run javascript
         /*request.setAttribute("userJSON", json);
         RequestDispatcher dispatcher = getServletContext()

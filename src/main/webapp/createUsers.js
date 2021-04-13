@@ -1,6 +1,6 @@
-$(document).on('click', document.getElementById('update_users'), function () {
+/*$(document).on('click', document.getElementById('update_users'), function () {
   $.get(window.location.origin + '/users', usersFetch());
-});
+});*/
 
 /*$("#update_users").click(function (e) {
   e.preventDefault();
@@ -9,6 +9,14 @@ $(document).on('click', document.getElementById('update_users'), function () {
     type: "GET",
   }).done(usersFetch());
 });*/
+
+$('#update_users').click(function (e) {
+  e.preventDefault();
+  $.ajax({
+    url: window.location.origin + '/users',
+    type: 'GET',
+  }).done(usersFetch());
+});
 
 async function usersFetch() {
   //add a new user onto the dashboard based on how many are returned
