@@ -10,13 +10,26 @@
   }).done(usersFetch());
 });*/
 
-$('#update_users').click(function (e) {
+$(document).ready(usersGet);
+
+function usersGet() {
+  $.ajax({
+    url: window.location.origin + '/users',
+    type: 'GET',
+  }).done(usersFetch());
+}
+
+function dashboard_ticker() {
+  setInterval(usersGet(), 8000);
+}
+
+/*$('#update_users').click(function (e) {
   e.preventDefault();
   $.ajax({
     url: window.location.origin + '/users',
     type: 'GET',
   }).done(usersFetch());
-});
+});*/
 
 async function usersFetch() {
   //add a new user onto the dashboard based on how many are returned
