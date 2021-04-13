@@ -50,21 +50,19 @@ public final class Chat {
     }
 
     public static Chat newChat(Datastore datastore, String participantId1, String participantId2) {
-        boolean chat_exists = Chat.chatExists(datastore, participantId1, participantId2);
+        Chat chat = Chat.chatExists(datastore, participantId1, participantId2);
 
-        if (chat_exists == true) {
-            return null;
+        if (chat == null){
+            KeyFactory keyFactory = datastore.newKeyFactory().setKind("chat");
+            Key chatKey = datastore.allocateId(keyFactory.newKey());
+
+            Entity chatEntity = Entity.newBuilder(chatKey).set("participants", participantId1, participantId2)
+                    .set("messages", ListValue.of("Chat Start")).build();
+
+            datastore.add(chatEntity);
+            System.out.println("Breakpoint");
+            chat = new Chat(chatEntity);
         }
-
-        KeyFactory keyFactory = datastore.newKeyFactory().setKind("chat");
-        Key chatKey = datastore.allocateId(keyFactory.newKey());
-
-        Entity chatEntity = Entity.newBuilder(chatKey).set("participants", participantId1, participantId2)
-                .set("messages", ListValue.of("Chat Start")).build();
-
-        datastore.add(chatEntity);
-        System.out.println("Breakpoint");
-        Chat chat = new Chat(chatEntity);
 
         return chat;
     }
@@ -108,7 +106,7 @@ public final class Chat {
         return chats;
     }
 
-    public static boolean chatExists(Datastore datastore, String participantId1, String participantId2) {
+    public static Chat chatExists(Datastore datastore, String participantId1, String participantId2) {
         Query<Entity> chatQuery = Query.newEntityQueryBuilder().setKind("chat")
                 .setFilter(CompositeFilter.and(PropertyFilter.eq("participants", participantId1),
                         PropertyFilter.eq("participants", participantId2)))
@@ -117,24 +115,12 @@ public final class Chat {
 
         if (chatEntities.hasNext()) {
             System.out.printf("-Chat Exists\n");
-
-            while (chatEntities.hasNext()) {
-                Entity entity = chatEntities.next();
-                System.out.println(entity.getList("participants"));
-                System.out.println(entity.getList("messages"));
-            }
-
-            return true;
+            Entity entity = chatEntities.next();
+            Chat chat = new Chat(entity);
+            return chat;
         } else {
             System.out.printf("-Chat Doesn't Exist\n");
-
-            while (chatEntities.hasNext()) {
-                Entity entity = chatEntities.next();
-                System.out.println(entity.getList("participants"));
-                System.out.println(entity.getList("messages"));
-            }
-
-            return false;
+            return null;
         }
     }
 

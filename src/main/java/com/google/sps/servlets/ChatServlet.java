@@ -47,31 +47,22 @@ public class ChatServlet extends HttpServlet {
         String userid = request.getParameter("userid");
         String participantId1 = request.getParameter("pid1");
         String participantId2 = request.getParameter("pid2");
-       // Test participant ids
-        // String participantId1 = "0202411554509"; // Test id 1
-        // String participantId2 = "104737820262548186234"; // Test id 2
-
-        response.getWriter().println("Chat servlet working\n");
-        response.getWriter().println("Endpoint: " + endpoint);
+        
         Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
 
         Gson gson = new Gson();
         //Get a specific chat if the chkat id is passed
         if (chatId != null){
             Chat chat = Chat.getChatById(datastore, chatId);
-            response.getWriter().println("Chat " + chatId + "-" + chat);
             response.getWriter().println(gson.toJson(chat));
         } else if (userid != null){
             //Get all chats that belong to the user to put in the menu
             List<Chat> chats = Chat.getChatsByUser(datastore, userid);
-            response.getWriter().println("Number of chats belonging to " + userid + " = " + chats.size());
             response.getWriter().println(gson.toJson(chats));
         } else if(participantId1 != null && participantId2 != null){
             Chat chat = Chat.newChat(datastore, participantId1, participantId2);
-            response.getWriter().println("Chat between participants - " + gson.toJson(chat));
         } else{
             List<Chat> chats = Chat.getAllChats(datastore);
-            response.getWriter().println("Number of all chats = " + chats.size());
             response.getWriter().println(gson.toJson(chats));
         }
         // // OBJECTIVE: Create a chat between users
