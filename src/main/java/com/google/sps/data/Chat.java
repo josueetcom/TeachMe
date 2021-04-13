@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
 import java.time.LocalDateTime; 
+import java.util.stream.Collectors;
 
 /** An item on a todo list. */
 public final class Chat {
@@ -33,18 +34,17 @@ public final class Chat {
   private List<String> messages;
 
   //Constructor 1
-  Chat(long id, List<String> participants, List<String> messages) {
+  public Chat(long id, List<String> participants, List<String> messages) {
     this.id = id;
     this.participants = participants;
     this.messages = messages;
   }
 
   // //Constructor 2
-  Chat(Entity entity) {
+  public Chat(Entity entity) {
     this.id = (long) entity.getKey().getId();
-    this.participants = entity.getList("participants").stream(StringValue::get).collect(Collectors.toList());
-    this.messages = entity.getList("messages").stream(StringValue::get).collect(Collectors.toList());
-
+    this.participants = entity.getList("participants").stream().map(val -> ((StringValue) val).get()).collect(Collectors.toList());
+    this.messages = entity.getList("messages").stream().map(val -> ((StringValue) val).get()).collect(Collectors.toList());
   }
 
     public static Chat newChat(Datastore datastore, String participantId1, String participantId2) {
@@ -70,24 +70,19 @@ public final class Chat {
     }
 
     public static Chat getChatById(Datastore datastore, String chatId) {
-        KeyFactory keyFactory = datastore.newKeyFactory().setKind("chat");
-
-        Query<Entity> query = Query.newEntityQueryBuilder()
-            .setKind("chat")
-            .setFilter(PropertyFilter.eq("__key__", keyFactory.newKey(chatId)))
-            .build();
-
-        QueryResults<Entity> chatResults = datastore.run(query);
-        
-        try {
-            Entity chat = chatResults.next();
-            Chat c = new Chat(chat);
+        // try {
+            // Entity chat = chatResults.next();
+            Key chatKey = datastore.newKeyFactory().setKind("chat").newKey(Long.parseLong(chatId));
+            Entity chatEntity = datastore.get(chatKey);
+           
+            Chat chat = new Chat(chatEntity);
             System.out.println("Chat found");
-            return c;
-        } catch (Exception e) {
-            System.out.println("Chat not found");
-            return null;
-        }
+            return chat;
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        //     System.out.println("Chat not found");
+        //     return null;
+        // }
     }
 
     public static List<Chat> getChatsByUser(Datastore datastore, String participantId) {
@@ -157,11 +152,11 @@ public final class Chat {
         return id;
     }
 
-    public List<StringValue> getParticipants(){
+    public List<String> getParticipants(){
         return participants;
     }
 
-    public List<StringValue> getMessages(){
+    public List<String> getMessages(){
         return messages;
     }
 }
