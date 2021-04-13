@@ -1,30 +1,32 @@
-class User {
-  constructor(name, email, wishlist, teachlist) {
-    this.name = name;
-    this.email = email;
-    this.wishlist = wishlist;
-    this.teachlist = teachlist;
-  }
-}
+$(document).on('click', document.getElementById('update_users'), function () {
+  $.get(window.location.origin + '/users', usersFetch());
+});
+
+/*$("#update_users").click(function (e) {
+  e.preventDefault();
+  $.ajax({
+    url: window.location.origin + "/users",
+    type: "GET",
+  }).done(usersFetch());
+});*/
 
 async function usersFetch() {
   //add a new user onto the dashboard based on how many are returned
-  const users = await fetch('/users');
+  const users = await (await fetch('/users')).json();
   const userDashboard = document.getElementById('profile-grid');
   console.log('here');
   users.forEach((user) => {
     console.log(user);
-    let userObj = new User(user);
-    userDashboard.appendChild(createUserCard(userObj));
+    userDashboard.appendChild(createUserCard(user));
     console.log('user checked');
   });
 }
 
 //create a user template
-function createUserCard(userObj) {
+function createUserCard(user) {
   //make an empty card element
   const UserCard = document.createElement('div');
-  UserCard.className = 'card';
+  UserCard.className = 'card homepage-card';
 
   //create the user banner
   const UserBanner = document.createElement('div');
@@ -33,7 +35,7 @@ function createUserCard(userObj) {
   //create the name banner
   const nameBanner = document.createElement('a');
   const name = document.createElement('h3');
-  name.innerText = userObj.name;
+  name.innerText = user.name;
   nameBanner.appendChild(name);
 
   //create the teachlist categories
@@ -45,13 +47,11 @@ function createUserCard(userObj) {
   tagElement.innerText = 'Tag';
 
   userTeachlist.appendChild(tagElement);
-  userTeachlist.appendChild(tagElement);
-  userTeachlist.appendChild(tagElement);
 
   //combine them in user card and return
   UserBanner.appendChild(nameBanner);
   UserBanner.appendChild(userTeachlist);
   UserCard.appendChild(UserBanner);
 
-  return UserBanner;
+  return UserCard;
 }

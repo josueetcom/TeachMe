@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.sps.data.User;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
@@ -30,7 +31,7 @@ public class UserServlet extends HttpServlet {
     KeyFactory keyFactory = datastore.newKeyFactory();
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException { // create
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException { // create
 
       String button_type = request.getParameter("submission").toString();
       if(button_type == "update"){
@@ -70,7 +71,7 @@ public class UserServlet extends HttpServlet {
 
 
     @Override
-    public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException  { // update
+    public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  { // update
         
       // get form information
       String NOTHING = Jsoup.clean(request.getParameter("NOTHING"), Whitelist.none());
@@ -108,9 +109,7 @@ public class UserServlet extends HttpServlet {
     }
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException  { // read
-        response.setContentType("json");
-
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException { // read
         Query<Entity> query =
            Query.newEntityQueryBuilder().setKind("users").setOrderBy(OrderBy.desc("name")).build();
         QueryResults<Entity> results = datastore.run(query);  
@@ -126,8 +125,18 @@ public class UserServlet extends HttpServlet {
 
           User u_user = new User(u_name, u_email, u_wishlist, u_teachlist);
           users.add(u_user);
-          //response.getWriter().println(u_user.toString());
         }       
+
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+        response.setContentType("application/json;");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().println(json);
+        //maintians url and servlet info but doesn't run javascript
+        /*request.setAttribute("userJSON", json);
+        RequestDispatcher dispatcher = getServletContext()
+          .getRequestDispatcher("/index.html");
+        dispatcher.forward(request, response);*/
     }
 
     /*@Override
