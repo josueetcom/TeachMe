@@ -12,6 +12,8 @@ import com.google.cloud.datastore.FullEntity;
 import com.google.cloud.datastore.KeyFactory;
 import com.google.cloud.datastore.IncompleteKey;
 import com.google.cloud.datastore.Value;
+import com.google.cloud.datastore.ListValue;
+import com.google.cloud.datastore.StringValue;
 import com.google.gson.Gson;
 import com.google.sps.data.Chat;
 
@@ -19,6 +21,8 @@ import java.io.IOException;
 // import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
+
 // import java.util.stream.Collectors;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,9 +42,9 @@ public class ChatServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String endpoint = request.getPathInfo();
-        String chatid = request.getParameter("chatid");
+        String chatId = request.getParameter("chatid");
         String userid = request.getParameter("userid");
-        
+
        // Test participant ids
         String participantId1 = "0202411554509"; // Test id 1
         String participantId2 = "104737820262548186234"; // Test id 2
@@ -52,9 +56,9 @@ public class ChatServlet extends HttpServlet {
         Gson gson = new Gson();
         
         //Get a specific chat if the chat id is passed
-        if (chatid != null){
-            Chat chat = Chat.getChatById(datastore, chatid);
-            response.getWriter().println("Chat " + chatid + " - Messages: ");
+        if (chatId != null){
+            Chat chat = Chat.getChatById(datastore, chatId);
+            response.getWriter().println("Chat " + chatId + "-" + chat);
             response.getWriter().println(gson.toJson(chat));
         }
         //Get all chats that belong to the user to put in the menu

@@ -74,18 +74,19 @@ public final class Chat {
 
         Query<Entity> query = Query.newEntityQueryBuilder()
             .setKind("chat")
-            .setFilter(PropertyFilter.gt("__key__", keyFactory.newKey(chatId)))
+            .setFilter(PropertyFilter.eq("__key__", keyFactory.newKey(chatId)))
             .build();
 
         QueryResults<Entity> chatResults = datastore.run(query);
-
+        
         try {
-        Entity chat = chatResults.next();
-        Chat c = new Chat(chat);
-        System.out.println("Chat found");
-        return c;
+            Entity chat = chatResults.next();
+            Chat c = new Chat(chat);
+            System.out.println("Chat found");
+            return c;
         } catch (Exception e) {
-        return null;
+            System.out.println("Chat not found");
+            return null;
         }
     }
 
@@ -133,6 +134,7 @@ public final class Chat {
             while(chatEntities.hasNext()){
                 Entity entity = chatEntities.next();
                 System.out.println(entity.getList("participants"));
+                System.out.println(entity.getList("messages"));
             }  
 
             return true;
@@ -143,6 +145,7 @@ public final class Chat {
             while(chatEntities.hasNext()){
                 Entity entity = chatEntities.next();
                 System.out.println(entity.getList("participants"));
+                System.out.println(entity.getList("messages"));
             }  
 
             return false;
