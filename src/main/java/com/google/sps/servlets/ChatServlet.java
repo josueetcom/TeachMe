@@ -56,12 +56,6 @@ public class ChatServlet extends HttpServlet {
         Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
 
         Gson gson = new Gson();
-
-        // Key chatKey = datastore.newKeyFactory().setKind("chat").newKey(chatId);
-        // Entity chatEntity = datastore.get(chatKey);
-           
-        // Chat chat = new Chat(chatEntity);
-        
         //Get a specific chat if the chkat id is passed
         if (chatId != null){
             Chat chat = Chat.getChatById(datastore, chatId);

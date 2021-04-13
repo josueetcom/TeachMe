@@ -54,7 +54,6 @@ body {
   height: 100%;
   margin: 0;
   border-bottom: solid #f0f0f0 2px;
-
 }
 
 .content {
@@ -395,9 +394,5 @@ simple mistaak .img-extrasmall {
 /*# sourceMappingURL=style.css.map */
 
 #content-userprofile {
-    display: none;
+  display: none;
 }
-
-
-
-
