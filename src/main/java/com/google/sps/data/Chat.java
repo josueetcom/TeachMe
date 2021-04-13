@@ -42,8 +42,8 @@ public final class Chat {
   // //Constructor 2
   Chat(Entity entity) {
     this.id = (long) entity.getKey().getId();
-    this.participants = entity.getList("participants");
-    this.messages = entity.getList("messages");
+    this.participants = entity.getList("participants").stream(StringValue::get).collect(Collectors.toList());
+    this.messages = entity.getList("messages").stream(StringValue::get).collect(Collectors.toList());
 
   }
 
