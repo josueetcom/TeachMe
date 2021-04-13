@@ -33,7 +33,7 @@ public final class Chat {
   private List<String> messages;
 
   //Constructor 1
-  Chat(long id, List<StringValue> participants, List<StringValue> messages) {
+  Chat(long id, List<String> participants, List<String> messages) {
     this.id = id;
     this.participants = participants;
     this.messages = messages;
