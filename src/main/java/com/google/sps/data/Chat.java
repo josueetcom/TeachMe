@@ -13,6 +13,7 @@ import com.google.cloud.datastore.Key;
 import com.google.cloud.datastore.KeyFactory;
 import com.google.cloud.datastore.IncompleteKey;
 import com.google.cloud.datastore.Value;
+import com.google.cloud.datastore.ListValue;
 import com.google.cloud.datastore.StringValue;
 import com.google.gson.Gson;
 import com.google.sps.data.Chat;
@@ -22,6 +23,7 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
+import java.time.LocalDateTime; 
 
 /** An item on a todo list. */
 public final class Chat {
@@ -57,7 +59,7 @@ public final class Chat {
 
         Entity chatEntity = Entity.newBuilder(chatKey)
             .set("participants", participantId1, participantId2)
-            .set("messages", "...Chat Start")
+            .set("messages", ListValue.of("Chat Start"))
             .build();
 
         datastore.add(chatEntity);

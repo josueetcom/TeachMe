@@ -40,8 +40,9 @@ public class ChatServlet extends HttpServlet {
         String endpoint = request.getPathInfo();
         String chatid = request.getParameter("chatid");
         String userid = request.getParameter("userid");
+        
        // Test participant ids
-        String participantId1 = "1155450902024"; // Test id 1
+        String participantId1 = "0202411554509"; // Test id 1
         String participantId2 = "104737820262548186234"; // Test id 2
 
         response.getWriter().println("Chat servlet working\n");
