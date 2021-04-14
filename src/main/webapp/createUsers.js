@@ -5,7 +5,7 @@ $(document).ready(usersFetch);
 }*/
 
 async function usersFetch() {
-  //add a new user onto the dashboard based on how many are returned
+  // add a new user onto the dashboard based on how many are returned
   const users = await (await fetch('/users')).json();
   const userDashboard = document.getElementById('profile-grid');
   userDashboard.innerHTML = '';
@@ -17,29 +17,29 @@ async function usersFetch() {
   });
 }
 
-//create a user template
+// create a user template
 function createUserCard(user) {
-  //make an empty card element
+  // make an empty card element
   const UserCard = document.createElement('div');
   UserCard.className = 'card homepage-card';
 
-  //create the user banner
+  // create the user banner
   const UserBanner = document.createElement('div');
   UserBanner.className = 'card-banner';
 
-  //create the name banner
+  // create the name banner
   const nameBanner = document.createElement('a');
   const name = document.createElement('h3');
   name.innerText = user.name;
   nameBanner.appendChild(name);
 
-  //include the user profile photo
+  // include the user profile photo
   const userIMG = document.createElement('img');
   userIMG.src = user.imgURL;
   userIMG.alt = 'assets/svgs/account.svg';
   userIMG.className = 'img-small';
 
-  //create the teachlist categories
+  // create the teachlist categories
   const userTeachlist = document.createElement('div');
   userTeachlist.className = 'user-teachlist';
 
@@ -50,7 +50,7 @@ function createUserCard(user) {
     userTeachlist.appendChild(tagElement);
   });
 
-  //combine them in user card and return
+  // combine them in user card and return
   UserBanner.appendChild(nameBanner);
   UserBanner.appendChild(userIMG);
   UserBanner.appendChild(userTeachlist);
