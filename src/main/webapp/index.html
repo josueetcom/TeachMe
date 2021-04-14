@@ -4,11 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="./css/style.css" />
     <meta name="google-signin-scope" content="profile email" />
     <meta
@@ -17,140 +12,126 @@
     />
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Dashboard</title>
-    <script src="script.js"></script>
+    <title>Document</title>
   </head>
-
   <body>
-    <!-- ========================================================
-        Menu
-         ======================================================== -->
-    <div class="menu">
-      <div class="profile-bar">
-        <img
-          class="img-small"
-          src="./assets/svgs/account.svg"
-          alt="User profile image"
-        />
-        <a href="#" id="user-profile" onclick="toggleContent(); return false;"
-          >Username</a
-        >
-      </div>
+    <!-- Main website grid -->
+    <div class="grid main-grid">
+      <!-- Main menu -->
+      <div class="menu main-menu">
+        <a href="">
+          <div class="strip big-header-strip">
+            <img
+              class="img-medium"
+              src="./assets/svgs/account.svg"
+              alt="User profile image"
+            />
+            <h2>Username</h2>
+          </div>
+        </a>
 
-      <div class="menu-item">
-        <img
-          class="img-extrasmall"
-          src="./assets/svgs/menu.svg"
-          alt="All users icon"
-          style="margin-right: 8px"
-        />
-        <a href="./dashboard.html">All Users</a>
-      </div>
+        <div class="strip normal-strip">
+          <img class="img-small" src="./assets/svgs/menu.svg" />
+          <a href=""><h3>All Users</h3></a>
+        </div>
 
-      <div class="menu-item">
-        <img
-          class="img-extrasmall"
-          src="./assets/svgs/search.svg"
-          alt="Search topics icon"
-          style="margin-right: 8px"
-        />
-        <a href="/">Search by Topic</a>
-      </div>
+        <div class="strip normal-strip">
+          <img class="img-small" src="./assets/svgs/search.svg" />
+          <a href=""><h3>Search by Topic</h3></a>
+        </div>
 
-      <div class="menu-header" id="matches">Matches</div>
+        <!-- Matches list -->
+        <div class="strip header-strip">
+          <a href=""><h2>Matches</h2></a>
+        </div>
 
-      <div class="menu-bucket" id="matches-bucket">
-        <div class="menu-item">
-          <img
-            class="img-extrasmall"
-            src="./assets/svgs/account.svg"
-            alt="User partner match icon"
-          />
-          <a href="/">Username</a>
+        <div class="container strip-container">
+          <div class="strip normal-strip">
+            <img class="img-small" src="./assets/svgs/person.svg" />
+            <a href=""><h3>Username</h3></a>
+          </div>
+
+          <div class="strip normal-strip">
+            <img class="img-small" src="./assets/svgs/person.svg" />
+            <a href=""><h3>Username</h3></a>
+          </div>
+        </div>
+
+        <!-- Topic Wishlist -->
+        <div class="strip header-strip">
+          <a href=""><h2>Topic Wishlist</h2></a>
+        </div>
+
+        <div class="container strip-container" id="wishList">
+          <div class="strip normal-strip">
+            <h3>Topic</h3>
+          </div>
+
+          <div class="strip normal-strip">
+            <h3>Topic</h3>
+          </div>
+        </div>
+
+        <!-- Topic Teachlist -->
+        <div class="strip header-strip">
+          <a href=""><h2>Topic Teachlist</h2></a>
+        </div>
+
+        <div class="container strip-container" id="teachList">
+          <div class="strip normal-strip">
+            <h3>Topic</h3>
+          </div>
+
+          <div class="strip normal-strip">
+            <h3>Topic</h3>
+          </div>
         </div>
       </div>
 
-      <div class="menu-header" id="wishlist">Topic Wishlist</div>
+      <!-- Nested grid (for all content) -->
+      <div class="grid nested-grid">
+        <!-- Top menu bar -->
+        <div class="menu top-menu">
+          <h2 class="thin">Page Title</h2>
+          <div
+            class="g-signin2"
+            data-onsuccess="onSignIn"
+            data-theme="dark"
+          ></div>
+        </div>
 
-      <div class="menu-bucket" id="wishlist-bucket">
-        <div class="menu-item">Item</div>
-      </div>
-
-      <div class="menu-header" id="teachlist">Topic Teachlist</div>
-
-      <div class="menu-bucket" id="teachlist-bucket">
-        <div class="menu-item">Item</div>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="header">
-        <h3 class="header-title" id="headert">Username</h3>
-        <div
-          class="g-signin2"
-          data-onsuccess="onSignIn"
-          data-theme="dark"
-        ></div>
-      </div>
-      <div class="content" id="content-userprofile">
-        <div class="card userprofile-card">
+        <div class="card large-card" id="userProfileCard">
           <h1>Your Profile</h1>
-          <br />
-          <h4>Email</h4>
-          <p id="email">email here</p>
+          <h3 class="bold">Email</h3>
+          <p>Email here</p>
 
-          <h4>Wishlist & Teachlist</h4>
-
-          <div class="user-teachlist">
-            <div class="tag">Tag</div>
+          <h3 class="bold">Wishlist</h3>
+          <div class="container tag-container outline">
+            <div class="item tag"><h3>Topic</h3></div>
           </div>
-          <form id="my-form2" action="/users" method="POST">
-            <input type="hidden" name="email" id="post_email" />
-            <input type="hidden" name="id" id="post_id" />
-            <input type="hidden" name="NOTHING" id="NOTHING" value="" />
-            <textarea
-              id="txt2"
-              name="wishlist"
-              placeholder="Write the skills you wish to learn with commas separating each item:"
-              maxlength="200"
-            ></textarea>
-            <br />
-            <textarea
-              id="txt2"
-              name="teachlist"
-              placeholder="Write the skills you wish to teach with commas separating each item:"
-              maxlength="200"
-            ></textarea>
-            <br />
-            <button type="submit" name="submission" value="create">
-              Create
-            </button>
-            <button type="submit" name="submission" value="update">
-              Update
-            </button>
-          </form>
+
+          <h3 class="bold">Teachlist</h3>
+          <div class="container tag-container outline">
+            <div class="item tag"><h3>Topic</h3></div>
+          </div>
         </div>
-      </div>
-      <div class="content" id="content-dashboard">
-        <div class="profile-grid">
-          <div class="card homepage-card">
-            <div class="card-banner">
-              <a href="">
-                <h3>Username</h3>
-              </a>
 
-              <div class="user-teachlist" id="card-list">
-                <div class="tag">Tag</div>
-                <div class="tag">Tag</div>
-                <div class="tag">Tag</div>
-              </div>
-            </div>
+        <div class="card small-card">
+          <a href=""><h3>Profile Name</h3></a>
+
+          <div class="container tag-container">
+            <div class="item tag"><p>Tag</p></div>
+            <div class="item tag"><p>Tag</p></div>
           </div>
+        </div>
 
-          <div class="card"></div>
-          <div class="card"></div>
-          <div class="card"></div>
-          <div class="card"></div>
+        <div class="card medium-card">
+          <a href=""><h3>Profile Name</h3></a>
+
+          <div class="container tag-container">
+            <div class="item tag"><p>Tag</p></div>
+            <div class="item tag"><p>Tag</p></div>
+          </div>
         </div>
       </div>
     </div>
