@@ -56,9 +56,7 @@ public class UserServlet extends HttpServlet {
     keyFactory.setKind("users");
 
     // take the user elements and create a new entity object for it
-    FullEntity userEntity = Entity.newBuilder(keyFactory.newKey(id))
-        .set("imgURL", imgURL)
-        .set("name", name)
+    FullEntity userEntity = Entity.newBuilder(keyFactory.newKey(id)).set("imgURL", imgURL).set("name", name)
         .set("email", email)
         .set("wishlist", Arrays.asList(wishlist).stream().map(StringValue::of).collect(Collectors.toList()))
         .set("teachlist", Arrays.asList(teachlist).stream().map(StringValue::of).collect(Collectors.toList())).build();
@@ -127,12 +125,12 @@ public class UserServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException { // read
-    
-    //query all the user information from datastore
+
+    // query all the user information from datastore
     Query<Entity> query = Query.newEntityQueryBuilder().setKind("users").setOrderBy(OrderBy.desc("name")).build();
     QueryResults<Entity> results = datastore.run(query);
 
-    //Turn the user info into an of user objects 
+    // Turn the user info into an of user objects
     List<User> users = new ArrayList<>();
     while (results.hasNext()) {
       Entity entity = results.next();
@@ -150,7 +148,7 @@ public class UserServlet extends HttpServlet {
       users.add(user);
     }
 
-    //return the users as json 
+    // return the users as json
     Gson gson = new Gson();
     String json = gson.toJson(users);
     response.setContentType("application/json;");
