@@ -61,6 +61,7 @@ public class ChatServlet extends HttpServlet {
             response.getWriter().println(gson.toJson(chats));
         } else if(participantId1 != null && participantId2 != null){
             Chat chat = Chat.newChat(datastore, participantId1, participantId2);
+            response.getWriter().println(gson.toJson(chat));
         } else{
             List<Chat> chats = Chat.getAllChats(datastore);
             response.getWriter().println(gson.toJson(chats));
