@@ -21,6 +21,7 @@ function onSignIn(googleUser) {
   document.getElementById('post_id').value = profile.getId().toString();
   document.getElementById('post_name').value =
     profile.getGivenName() + ' ' + profile.getFamilyName();
+  document.getElementById('imgURL').value = profile.getImageUrl();
 }
 
 function toggleContent() {

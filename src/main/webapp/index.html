@@ -106,6 +106,7 @@
             <div class="tag">Tag</div>
           </div>
           <form id="my-form2" action="/users" method="POST">
+            <input type="hidden" name="imgURL" id="imgURL" />
             <input type="hidden" name="email" id="post_email" />
             <input type="hidden" name="id" id="post_id" />
             <input type="hidden" name="name" id="post_name" />
@@ -155,9 +156,7 @@
           <div class="card"></div>
         </div>
         <div>
-          <form>
-            <button id="update_users">Update Users</button>
-          </form>
+          <button id="update_users" onclick="usersFetch()">Refresh</button>
         </div>
       </div>
     </div>

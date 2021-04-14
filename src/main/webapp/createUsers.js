@@ -1,40 +1,14 @@
-/*$(document).on('click', document.getElementById('update_users'), function () {
-  $.get(window.location.origin + '/users', usersFetch());
-});*/
+$(document).ready(usersFetch);
 
-/*$("#update_users").click(function (e) {
-  e.preventDefault();
-  $.ajax({
-    url: window.location.origin + "/users",
-    type: "GET",
-  }).done(usersFetch());
-});*/
-
-$(document).ready(usersGet);
-
-function usersGet() {
-  $.ajax({
-    url: window.location.origin + '/users',
-    type: 'GET',
-  }).done(usersFetch());
-}
-
-function dashboard_ticker() {
-  setInterval(usersGet(), 8000);
-}
-
-/*$('#update_users').click(function (e) {
-  e.preventDefault();
-  $.ajax({
-    url: window.location.origin + '/users',
-    type: 'GET',
-  }).done(usersFetch());
-});*/
+/*function dashboard_ticker() {
+  setInterval(usersFetch, 8000);
+}*/
 
 async function usersFetch() {
   //add a new user onto the dashboard based on how many are returned
   const users = await (await fetch('/users')).json();
   const userDashboard = document.getElementById('profile-grid');
+  userDashboard.innerHTML = '';
   console.log('here');
   users.forEach((user) => {
     console.log(user);
@@ -59,18 +33,26 @@ function createUserCard(user) {
   name.innerText = user.name;
   nameBanner.appendChild(name);
 
+  //include the user profile photo
+  const userIMG = document.createElement('img');
+  userIMG.src = user.imgURL;
+  userIMG.alt = 'assets/svgs/account.svg';
+  userIMG.className = 'img-small';
+
   //create the teachlist categories
   const userTeachlist = document.createElement('div');
   userTeachlist.className = 'user-teachlist';
 
-  const tagElement = document.createElement('div');
-  tagElement.className = 'tag';
-  tagElement.innerText = 'Tag';
-
-  userTeachlist.appendChild(tagElement);
+  user.teachlist.forEach((skill) => {
+    const tagElement = document.createElement('div');
+    tagElement.className = 'tag';
+    tagElement.innerText = skill;
+    userTeachlist.appendChild(tagElement);
+  });
 
   //combine them in user card and return
   UserBanner.appendChild(nameBanner);
+  UserBanner.appendChild(userIMG);
   UserBanner.appendChild(userTeachlist);
   UserCard.appendChild(UserBanner);
 
