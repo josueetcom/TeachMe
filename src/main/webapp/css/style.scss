@@ -41,8 +41,6 @@ body {
   height: 100%;
   margin: 0;
   border-bottom: solid rgb(240, 240, 240) 2px;
-
-
 }
 
 .content {
@@ -51,8 +49,8 @@ body {
   grid-row-start: 2;
   display: flex;
   padding: 2rem 3rem;
+  color: rgb(179, 179, 179);
 }
-
 /* Menu styles */
 .menu-header {
   width: 100%;
@@ -117,7 +115,7 @@ body {
 .profile-grid {
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
   grid-auto-rows: minmax(100px, fit-content);
   justify-items: center;
   align-items: center;
@@ -182,7 +180,10 @@ body {
 
   &.userprofile-card {
     flex-direction: column;
-    width: 700px;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    // display: none;
+    width: 100%;
     padding: 2rem 3rem;
     background: linear-gradient(to top right, #f12711, #f5af19);
     h1 {
@@ -284,9 +285,9 @@ h3 {
 img {
   margin: 0 4px;
 }
-simple mistaak .img-extrasmall {
-  width: 20px;
-}
+// simple mistaak .img-extrasmall {
+//   width: 20px;
+// }
 
 .img-small {
   width: 40px;
@@ -297,5 +298,5 @@ simple mistaak .img-extrasmall {
 }
 
 .img-large {
-  width: 100px;
+  width: 40px;
 }

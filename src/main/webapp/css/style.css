@@ -42,8 +42,8 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -54,7 +54,6 @@ body {
   height: 100%;
   margin: 0;
   border-bottom: solid #f0f0f0 2px;
-
 }
 
 .content {
@@ -67,6 +66,7 @@ body {
   display: -ms-flexbox;
   display: flex;
   padding: 2rem 3rem;
+  color: #b3b3b3;
 }
 
 /* Menu styles */
@@ -143,8 +143,8 @@ body {
   display: -ms-grid;
   display: grid;
   width: 100%;
-  -ms-grid-columns: 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-columns: (minmax(200px, 300px)) [auto-fit];
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
   grid-auto-rows: minmax(100px, -webkit-fit-content);
   grid-auto-rows: minmax(100px, fit-content);
   justify-items: center;
@@ -240,7 +240,10 @@ body {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  width: 700px;
+  -ms-grid-column: 1;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  width: 100%;
   padding: 2rem 3rem;
   background: -webkit-gradient(
     linear,
@@ -377,10 +380,6 @@ img {
   margin: 0 4px;
 }
 
-simple mistaak .img-extrasmall {
-  width: 20px;
-}
-
 .img-small {
   width: 40px;
 }
@@ -393,11 +392,3 @@ simple mistaak .img-extrasmall {
   width: 100px;
 }
 /*# sourceMappingURL=style.css.map */
-
-#content-userprofile {
-    display: none;
-}
-
-
-
-
