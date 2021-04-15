@@ -16,7 +16,30 @@ function onSignIn(googleUser) {
   document.getElementById('profileTitle').innerHTML =
     'Welcome ' + profile.getName();
   document.getElementById('profileEmail').innerHTML = profile.getEmail();
-document.getElementById('profilePhoneNumber').innerHTML = profile.getId();
+  //   document.getElementById('profileId').value = profile.getId();
+
+  var user = {
+    email: profile.getEmail(),
+    id: profile.getId(),
+    name: profile.getName(),
+    imgURL: profile.getImageUrl(),
+  };
+
+  var formBody = [];
+  for (var property in user) {
+    var encodedKey = encodeURIComponent(property);
+    var encodedValue = encodeURIComponent(user[property]);
+    formBody.push(encodedKey + '=' + encodedValue);
+  }
+  formBody = formBody.join('&');
+
+  fetch('/users', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+    },
+    body: formBody,
+  });
 }
 
 function toggleContent() {
