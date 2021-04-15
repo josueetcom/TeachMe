@@ -16,7 +16,7 @@ function onSignIn(googleUser) {
   document.getElementById('profileTitle').innerHTML =
     'Welcome ' + profile.getName();
   document.getElementById('profileEmail').innerHTML = profile.getEmail();
-  //   document.getElementById('profileId').value = profile.getId();
+document.getElementById('profilePhoneNumber').innerHTML = profile.getId();
 }
 
 function toggleContent() {
@@ -45,4 +45,10 @@ async function loadChats() {
   // for (chat in chatsJson) {
   //     console.log(chat.id);
   // }
+}
+
+function deleteContent(obj){
+
+  obj.parentNode.parentNode.removeChild(obj.parentNode)
+
 }
