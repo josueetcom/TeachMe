@@ -25,6 +25,8 @@ import java.util.List;
 import java.lang.String;
 import java.time.LocalDateTime;
 import java.util.stream.Collectors;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;
 
 /** An item on a todo list. */
 public final class Chat {
@@ -123,23 +125,33 @@ public final class Chat {
         }
     }
 
-    public static Chat newMessage(Datastore datastore, String chatId, String userId, String message) {
+    public static List<StringValue> newMessage(Datastore datastore, String chatId, String userName, String message) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+        LocalDateTime now = LocalDateTime.now();  
+        String currentTime = dtf.format(now);
+
+        // Add username and timestamp to beginning of message
+        message = userName + " - " + currentTime + ": " + message;
+        // Get the chat entity
         Key chatKey = datastore.newKeyFactory().setKind("chat").newKey(Long.parseLong(chatId));
         Entity chatEntity = datastore.get(chatKey);
 
-        // Note: So far what I've found online says you cannot add to a list property 
-        // without getting the entire list and adding the new item to it, then replace 
-        // the old list property on the entity. There must be a better way but Im stumped right now
-        List<String> messages = chatEntity.getList("messages").stream().map(val -> ((StringValue) val).get()).collect(Collectors.toList());
-        messages.add(message);
-        // Now here I need to find out how to make a List<Value<?>> with all 
-        // the strings like above but in revers
-        
-        // Entity updatedChatEntity = Entity.newBuilder(chatEntity).set("messages", message).build();
-        // Chat chat = new Chat(updatedChatEntity);
-        Chat chat = new Chat(chatEntity);
+        // Add the message to the chat entity
+        List<StringValue> messages  = chatEntity.getList("messages");
+        List<StringValue> newMessages = new ArrayList<StringValue>();
 
-        return chat;
+        // Make copy of messages list (first one is immutable for some reason)
+        for(int i = 0; i < messages.size(); i++){
+            newMessages.add(messages.get(i));
+        }
+        newMessages.add(StringValue.of(message));
+        System.out.println("Message added");
+
+        // Update the chat entity and put back in datastore
+        Entity updatedChatEntity = Entity.newBuilder(chatEntity).set("messages", newMessages).build();
+        datastore.update(updatedChatEntity);
+
+        return newMessages;
     }
 
     public long getId() {
