@@ -58,6 +58,11 @@ p {
   padding: 0;
 }
 
+p.message-box {
+  height: inherit;
+  overflow: auto;
+}
+
 a {
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -168,6 +173,16 @@ a:hover {
   padding: 0 10px 0 20px;
 }
 
+.strip.textbox-strip {
+  width: 100%;
+  height: 60px;
+  background: rgba(29, 29, 29, 0.562);
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  padding: 0 10px 0 20px;
+}
+
 .strip:hover {
   -webkit-transition: ease 0.3s;
   transition: ease 0.3s;
@@ -175,14 +190,20 @@ a:hover {
 }
 
 button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   outline: none;
+  font: 15px 'Montserrat', sans-serif;
   border-radius: 4px;
   border-color: black;
   -webkit-box-shadow: black 2px 2px 3px;
   box-shadow: black 2px 2px 3px;
-  padding: 3px 7px;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
   -webkit-transition: ease 0.1s;
   transition: ease 0.1s;
+  z-index: 1;
 }
 
 button:active {
@@ -221,8 +242,37 @@ button.warn:active {
   background: #ae0b0b;
 }
 
+button.card-button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  border: solid black 2px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: black;
+  background: none;
+}
+
+button.card-button:hover {
+  border: none;
+  background: rgba(255, 255, 255, 0.349);
+}
+
+button.card-button:active {
+  border: none;
+  background: white;
+}
+
 .card {
+  position: relative;
   height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
   border-radius: 6px;
   overflow: hidden;
   background: red;
@@ -242,6 +292,30 @@ button.warn:active {
   grid-column-start: 1;
   grid-column-end: -1;
   height: 500px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 5rem 10%;
+  outline: solid black 2px;
+  outline-offset: -20px;
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    right top,
+    from(#051937),
+    color-stop(#004d7a),
+    color-stop(#008793),
+    color-stop(#00bf72),
+    to(#a8eb12)
+  );
+  background-image: linear-gradient(
+    to right top,
+    #051937,
+    #004d7a,
+    #008793,
+    #00bf72,
+    #a8eb12
+  );
 }
 
 .card.medium-card {
@@ -250,6 +324,26 @@ button.warn:active {
 
 .card.small-card {
   /* Styles added when needed */
+}
+
+.card.chat-card {
+  -ms-grid-column: 1;
+  grid-column-start: 1;
+  grid-column-end: -1;
+  height: 500px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 1rem 8.5rem 1rem 1rem;
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    right top,
+    from(#008793),
+    color-stop(#00bf72),
+    to(#47d410)
+  );
+  background-image: linear-gradient(to right top, #008793, #00bf72, #47d410);
 }
 
 .card > p {
@@ -292,6 +386,26 @@ button.warn:active {
   border-radius: 6px;
 }
 
+.container.chat-container {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  height: inherit;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 1rem;
+  border-top: solid 1px black;
+  overflow: auto;
+}
+
 .item.tag {
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -301,4 +415,10 @@ button.warn:active {
   border: solid black 2px;
   margin: 5px 0 5px 3px;
 }
+
+.deleteButton{
+  display: block;
+  margin: 0 auto;
+}
+
 /*# sourceMappingURL=style.css.map */

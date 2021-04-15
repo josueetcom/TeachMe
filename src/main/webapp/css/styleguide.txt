@@ -1,0 +1,34 @@
+// Website Wide
+//  -->Tags
+//  --> h1 - 30px
+//  --> h2 - 
+//  --> h3 -
+//  --> p - 
+
+// Site Grid Structure Styles
+//  -->|Class: main-grid
+//  -->|Class: nested-grid
+
+// Menu Styles
+//  -->|Class: main-menu
+//  -->|Class: top-menu
+
+//  Components Styles
+//  -->Strips
+//  -->-->| Class: normal-strip
+//  -->-->| Class: header-strip
+//  -->-->| Class: big-header-strip
+//  -->Buttons
+//  -->-->| Class: normal-button
+//  -->-->| Class: info-button
+//  -->-->| Class: update-button
+//  -->-->| Class: warn-button
+//  -->Cards
+//  -->-->| Class: large-card
+//  -->-->| Class: medium-card
+//  -->-->| Class: small-card
+//  -->Containers
+//  -->-->| Class: strip-container
+//  -->-->| Class: tag-container
+//  -->Items
+//  -->-->| Class: tag

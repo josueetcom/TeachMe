@@ -68,10 +68,12 @@
         <div class="container strip-container" id="wishList">
           <div class="strip normal-strip">
             <h3>Topic</h3>
+            <img class="deleteButton" onclick="deleteContent(this)" src="assets/svgs/trash.webp">
           </div>
 
           <div class="strip normal-strip">
             <h3>Topic</h3>
+            <img class="deleteButton" onclick="deleteContent(this)" src="assets/svgs/trash.webp">
           </div>
         </div>
 
@@ -83,10 +85,12 @@
         <div class="container strip-container" id="teachList">
           <div class="strip normal-strip">
             <h3>Topic</h3>
+            <img class="deleteButton" onclick="deleteContent(this)" src="assets/svgs/trash.webp">
           </div>
 
           <div class="strip normal-strip">
             <h3>Topic</h3>
+            <img class="deleteButton" onclick="deleteContent(this)" src="assets/svgs/trash.webp">
           </div>
         </div>
       </div>
@@ -103,30 +107,45 @@
           ></div>
         </div>
 
+        <!-- User profile Card -->
         <div class="card large-card" id="userProfileCard">
           <h1 id="profileTitle">Your Profile</h1>
           <h3 class="bold">Email</h3>
           <p id="profileEmail">Email here</p>
-          <h3 class="bold">Phone Number</h3>
-          <p id="profilePhoneNumber">
-            Phone here (stored in the users entity on datastore)
-          </p>
-          <h3 class="bold">Discord</h3>
-          <p id="profilePhoneNumber">
-            Discord username (stored in the users entity on datastore)
-          </p>
+          <h3 class="bold">Bio</h3>
+          <p id="profileBio">Bio here</p>
           <h3 class="bold">ID</h3>
           <p id="profilePhoneNumber" id="profileId">User id here</p>
+          <img
+            class="img-large"
+            src="./assets/svgs/account.svg"
+            alt="User profile image"
+          />
+        </div>
 
-          <h3 class="bold">Wishlist</h3>
-          <div class="container tag-container outline" id="profileWishlist">
-            <div class="item tag"><h3>Topic</h3></div>
+        <!-- Chatbox card -->
+        <div class="card chat-card" id="chatboxCard">
+          <h1 id="chatTitle">Chat with User</h1>
+          <div class="container chat-container" id="chatMessages">
+            <p class="message-box" id="chatMessages">Messages here</p>
           </div>
 
-          <h3 class="bold">Teachlist</h3>
-          <div class="container tag-container outline" id="profileTeachlist">
-            <div class="item tag"><h3>Topic</h3></div>
-          </div>
+          <form
+            method="POST"
+            action="/newmessage"
+            id="message-form"
+            style="width: 100%; height: fit-content"
+          >
+            <input
+              type="text"
+              class="strip textbox-strip"
+              name="message"
+              placeholder="Type your message..."
+            />
+            <input name="chatid" id="say" value="5645760532054016" />
+            <input name="userid" id="say" value="104737820262548186234" />
+          </form>
+          <button class="card-button" form="message-form">Send</button>
         </div>
 
         <div class="card small-card">

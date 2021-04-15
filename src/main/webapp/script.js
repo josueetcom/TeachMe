@@ -69,3 +69,9 @@ async function loadChats() {
   //     console.log(chat.id);
   // }
 }
+
+function deleteContent(obj){
+
+  obj.parentNode.parentNode.removeChild(obj.parentNode)
+
+}
