@@ -223,6 +223,13 @@ button.warn:active {
 
 .card {
   height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
   border-radius: 6px;
   overflow: hidden;
   background: red;
@@ -242,6 +249,30 @@ button.warn:active {
   grid-column-start: 1;
   grid-column-end: -1;
   height: 500px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 5rem 10%;
+  outline: solid black 2px;
+  outline-offset: -20px;
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    right top,
+    from(#051937),
+    color-stop(#004d7a),
+    color-stop(#008793),
+    color-stop(#00bf72),
+    to(#a8eb12)
+  );
+  background-image: linear-gradient(
+    to right top,
+    #051937,
+    #004d7a,
+    #008793,
+    #00bf72,
+    #a8eb12
+  );
 }
 
 .card.medium-card {

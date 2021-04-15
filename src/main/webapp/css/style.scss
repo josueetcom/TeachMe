@@ -204,6 +204,8 @@ button {
 //  -->-->| Class: small-card
 .card {
   height: 200px;
+  display: flex;
+  flex-direction: column;
   border-radius: 6px;
   overflow: hidden;
   background: red;
@@ -214,6 +216,18 @@ button {
     grid-column-start: 1;
     grid-column-end: -1;
     height: 500px;
+    justify-content: center;
+    padding: 5rem 10%;
+    outline: solid black 2px;
+    outline-offset: -20px;
+    background-image: linear-gradient(
+      to right top,
+      #051937,
+      #004d7a,
+      #008793,
+      #00bf72,
+      #a8eb12
+    );
   }
   &.medium-card {
     /* Styles added when needed */
