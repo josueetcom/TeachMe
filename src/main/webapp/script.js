@@ -11,17 +11,12 @@ function onSignIn(googleUser) {
 
   // The ID token you need to pass to your backend:
   var id_token = googleUser.getAuthResponse().id_token;
-  console.log('ID Token: ' + id_token);
-
-  document.getElementById('user-profile').innerHTML = profile.getGivenName();
-  document.getElementById('headert').innerHTML =
-    profile.getGivenName() + ' ' + profile.getFamilyName();
-  document.getElementById('email').innerHTML = profile.getEmail();
-  document.getElementById('post_email').value = profile.getEmail();
-  document.getElementById('post_id').value = profile.getId().toString();
-  document.getElementById('post_name').value =
-    profile.getGivenName() + ' ' + profile.getFamilyName();
-  document.getElementById('imgURL').value = profile.getImageUrl();
+  //   console.log('ID Token: ' + id_token);
+  document.getElementById('menuUsername').innerHTML = profile.getGivenName();
+  document.getElementById('profileTitle').innerHTML =
+    'Welcome ' + profile.getName();
+  document.getElementById('profileEmail').innerHTML = profile.getEmail();
+  //   document.getElementById('profileId').value = profile.getId();
 }
 
 function toggleContent() {
@@ -34,4 +29,20 @@ function toggleContent() {
     document.getElementById('content-dashboard').style.display = '';
     counter = 0;
   }
+}
+
+/** Fetches the user's chats from the server and adds it to the page. */
+async function loadChats() {
+  console.log('hello');
+  // const userId = googleUser.getBasicProfile().getId();
+  userId = '104737820262548186234';
+  const matchContainer = document.getElementById('matchList');
+  const responseFromServer = await fetch('/chats?userid=' + userId);
+  const chatsJson = await responseFromServer.json();
+
+  console.log(JSON.stringify(chatsJson));
+
+  // for (chat in chatsJson) {
+  //     console.log(chat.id);
+  // }
 }
