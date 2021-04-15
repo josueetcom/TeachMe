@@ -111,7 +111,70 @@
           <div class="card"></div>
         </div>
 
-        <div class="card small-card">
+        <!-- Nested grid (for all content) -->
+        <div class="grid nested-grid">
+          <!-- Top menu bar -->
+          <div class="menu top-menu">
+            <h2 class="thin">Dashboard</h2>
+            <div
+              class="g-signin2"
+              data-onsuccess="onSignIn"
+              data-theme="dark"
+            ></div>
+          </div>
+
+          <div class="card large-card" id="userProfileCard">
+            <h1 id="profileTitle">Your Profile</h1>
+            <h3 class="bold">Email</h3>
+            <p id="profileEmail">Email here</p>
+            <h3 class="bold">Phone Number</h3>
+            <p id="profilePhoneNumber">
+              Phone here (stored in the users entity on datastore)
+            </p>
+            <h3 class="bold">Discord</h3>
+            <p id="profilePhoneNumber">
+              Discord username (stored in the users entity on datastore)
+            </p>
+            <h3 class="bold">ID</h3>
+            <p id="profilePhoneNumber" id="profileId">User id here</p>
+
+            <h3 class="bold">Wishlist</h3>
+            <div class="container tag-container outline" id="profileWishlist">
+              <div class="item tag"><h3>Topic</h3></div>
+            </div>
+
+            <h3 class="bold">Teachlist</h3>
+            <div class="container tag-container outline" id="profileTeachlist">
+              <div class="item tag"><h3>Topic</h3></div>
+            </div>
+          </div>
+
+          <div class="card small-card">
+            <a href=""><h3>Profile Name</h3></a>
+
+            <div class="container tag-container">
+              <div class="item tag"><p>Tag</p></div>
+              <div class="item tag"><p>Tag</p></div>
+            </div>
+          </div>
+
+          <div class="card medium-card">
+            <a href=""><h3>Profile Name</h3></a>
+
+            <div class="container tag-container">
+              <div class="item tag"><p>Tag</p></div>
+              <div class="item tag"><p>Tag</p></div>
+            </div>
+          </div>
+
+          <div class="card small-card">
+            <a href=""><h3>Profile Name</h3></a>
+
+            <div class="container tag-container">
+              <div class="item tag"><p>Tag</p></div>
+              <div class="item tag"><p>Tag</p></div>
+            </div>
+          </div>
           <a href=""><h3>Profile Name</h3></a>
 
           <div class="container tag-container">
