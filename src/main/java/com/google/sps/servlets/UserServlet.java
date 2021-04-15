@@ -58,7 +58,7 @@ public class UserServlet extends HttpServlet {
     String id = "";
 
     // check to see if there is an id
-    if(isID){
+    if (isID) {
       id = Jsoup.clean(request.getParameter("id"), Whitelist.none());
     }
 
