@@ -28,8 +28,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-// import org.jsoup.Jsoup;
-// import org.jsoup.safety.Whitelist;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 import java.lang.String;
 import com.google.sps.data.Chat;
 
@@ -44,12 +44,15 @@ public class NewMessageServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Gson gson = new Gson();
         String message = Jsoup.clean(request.getParameter("message"), Whitelist.none());
-        String chatId = request.getParameter("chatid");
-        String chatId = request.getParameter("userid");
-
-        Chat chat = Chat.newChat(datastore, chatId, userId);
         
-        response.getWriter().println(gson.toJson(chat.messages));
+        String chatId = request.getParameter("chatid");
+        String userId = request.getParameter("userid");
+        
+        response.getWriter().println(message + chatId + userId);
+
+        Chat chat = Chat.newMessage(datastore, chatId, userId, message);
+        
+        // response.getWriter().println(gson.toJson(chat.getMessages()));
     }  
 }
 

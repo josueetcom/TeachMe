@@ -45,8 +45,7 @@ public final class Chat {
         this.id = (long) entity.getKey().getId();
         this.participants = entity.getList("participants").stream().map(val -> ((StringValue) val).get())
                 .collect(Collectors.toList());
-        this.messages = entity.getList("messages").stream().map(val -> ((StringValue) val).get())
-                .collect(Collectors.toList());
+        this.messages = entity.getList("messages").stream().map(val -> ((StringValue) val).get()).collect(Collectors.toList());
     }
 
     public static Chat newChat(Datastore datastore, String participantId1, String participantId2) {
@@ -124,15 +123,22 @@ public final class Chat {
         }
     }
 
-    public static Chat newMessage(Datastore datastore, String chatId, String userId, String message,) {
+    public static Chat newMessage(Datastore datastore, String chatId, String userId, String message) {
         Key chatKey = datastore.newKeyFactory().setKind("chat").newKey(Long.parseLong(chatId));
         Entity chatEntity = datastore.get(chatKey);
 
+        // Note: So far what I've found online says you cannot add to a list property 
+        // without getting the entire list and adding the new item to it, then replace 
+        // the old list property on the entity. There must be a better way but Im stumped right now
         List<String> messages = chatEntity.getList("messages").stream().map(val -> ((StringValue) val).get()).collect(Collectors.toList());
         messages.add(message);
-        chatEntity.set("messages", messages);
-
+        // Now here I need to find out how to make a List<Value<?>> with all 
+        // the strings like above but in revers
+        
+        // Entity updatedChatEntity = Entity.newBuilder(chatEntity).set("messages", message).build();
+        // Chat chat = new Chat(updatedChatEntity);
         Chat chat = new Chat(chatEntity);
+
         return chat;
     }
 
