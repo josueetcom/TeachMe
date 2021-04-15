@@ -415,4 +415,10 @@ button.card-button:active {
   border: solid black 2px;
   margin: 5px 0 5px 3px;
 }
+
+.deleteButton{
+  display: block;
+  margin: 0 auto;
+}
+
 /*# sourceMappingURL=style.css.map */
