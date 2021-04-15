@@ -17,6 +17,31 @@ function onSignIn(googleUser) {
     'Welcome ' + profile.getName();
   document.getElementById('profileEmail').innerHTML = profile.getEmail();
   //   document.getElementById('profileId').value = profile.getId();
+
+  signInCallback(id_token);
+}
+
+function signInCallback(authResult) {
+  if (authResult['code']) {
+    // Send the code to the server
+    $.ajax({
+      type: 'POST',
+      url: '/starter',
+      // Always include an `X-Requested-With` header in every AJAX request,
+      // to protect against CSRF attacks.
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function (result) {
+        console.log('success');
+      },
+      processData: false,
+      data: authResult['code'],
+    });
+  } else {
+    console.log('failure');
+  }
 }
 
 function toggleContent() {

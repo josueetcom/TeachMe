@@ -13,6 +13,7 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="script.js"></script>
+    <script src="createUsers.js"></script>
     <title>Document</title>
   </head>
 
@@ -91,7 +92,7 @@
       </div>
 
       <!-- Nested grid (for all content) -->
-      <div class="grid nested-grid">
+      <div class="grid nested-grid" id="grid">
         <!-- Top menu bar -->
         <div class="menu top-menu">
           <h2 class="thin">Dashboard</h2>
@@ -127,7 +128,7 @@
             <div class="item tag"><h3>Topic</h3></div>
           </div>
         </div>
-        
+
         <div class="card small-card">
           <a href=""><h3>Profile Name</h3></a>
 

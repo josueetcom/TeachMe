@@ -7,13 +7,18 @@ $(document).ready(usersFetch);
 async function usersFetch() {
   // add a new user onto the dashboard based on how many are returned
   const users = await (await fetch('/users')).json();
-  const userDashboard = document.getElementById('profile-grid');
-  userDashboard.innerHTML = '';
-  console.log('here');
+  const userDashboard = document.getElementById('grid');
+  // also clear the dashboard before adding new users
+  const sCards = Array.from(document.getElementsByClassName('small-card'));
+  sCards.forEach(function (card) {
+    card.remove();
+  });
+  const mCards = Array.from(document.getElementsByClassName('medium-card'));
+  mCards.forEach(function (card) {
+    card.remove();
+  });
   users.forEach((user) => {
-    console.log(user);
     userDashboard.appendChild(createUserCard(user));
-    console.log('user checked');
   });
 }
 
@@ -21,7 +26,7 @@ async function usersFetch() {
 function createUserCard(user) {
   // make an empty card element
   const userCard = document.createElement('div');
-  userCard.className = 'card homepage-card';
+  userCard.className = 'card medium-card';
 
   // create the user banner
   const userBanner = document.createElement('div');
@@ -45,7 +50,7 @@ function createUserCard(user) {
 
   user.teachlist.forEach((skill) => {
     const tagElement = document.createElement('div');
-    tagElement.className = 'tag';
+    tagElement.className = 'item tag';
     tagElement.innerText = skill;
     userTeachlist.appendChild(tagElement);
   });
