@@ -35,7 +35,7 @@ import com.google.sps.data.Chat;
 
 // Try typing "/chats" or "/chats?userid=Elijah" or "/chats?chatid=someid"
 // to see how the query parameters work for the servlet
-@WebServlet("/newmessage")
+@WebServlet("/message")
 public class NewMessageServlet extends HttpServlet {
     Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
     KeyFactory keyFactory = datastore.newKeyFactory();
@@ -46,13 +46,12 @@ public class NewMessageServlet extends HttpServlet {
         String message = Jsoup.clean(request.getParameter("message"), Whitelist.none());
         
         String chatId = request.getParameter("chatid");
-        String userId = request.getParameter("userid");
+        String userName = request.getParameter("username");
         
-        response.getWriter().println(message + chatId + userId);
-
-        Chat chat = Chat.newMessage(datastore, chatId, userId, message);
+        List<StringValue> updatedMessages = Chat.newMessage(datastore, chatId, userName, message);
         
-        // response.getWriter().println(gson.toJson(chat.getMessages()));
+        response.getWriter().println(message + chatId + userName);
+        response.getWriter().println(gson.toJson(updatedMessages));
     }  
 }
 

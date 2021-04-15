@@ -42,8 +42,16 @@ async function loadChats() {
   const chatsJson = await responseFromServer.json();
 
   console.log(JSON.stringify(chatsJson));
+}
 
-  // for (chat in chatsJson) {
-  //     console.log(chat.id);
-  // }
+//Loads the messages from a
+async function messageHandler() {
+  console.log('hello');
+  // const userId = googleUser.getBasicProfile().getId();
+  userId = '104737820262548186234';
+  const messagesContainer = document.getElementById('chatMessages');
+  const responseFromServer = await fetch('/messages');
+  const messagesJson = await responseFromServer.json();
+
+  console.log(JSON.stringify(messagesJson));
 }
