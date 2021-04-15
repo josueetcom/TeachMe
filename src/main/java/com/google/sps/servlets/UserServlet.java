@@ -40,7 +40,7 @@ public class UserServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException { // create
     FullEntity userEntity = parseUserEntity(request);
-    datastore.add(userEntity);    
+    datastore.add(userEntity);
     response.sendRedirect("index.html");
   }
 
@@ -54,26 +54,23 @@ public class UserServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException { // read
-    boolean isID = true;
+    boolean isID = request.getParameter("id") != null;
     String id = "";
 
-    //check to see if there is an id 
-    try {
+    // check to see if there is an id
+    if(isID){
       id = Jsoup.clean(request.getParameter("id"), Whitelist.none());
     }
-    catch(Exception IllegalArgumentException){
-      isID = false;
-    }
-
 
     Query<Entity> query = Query.newEntityQueryBuilder().setKind("user").build();
     keyFactory.setKind("user");
 
-    //If there is an id parameter, then return only that user 
-    if(isID){
-      query = Query.newEntityQueryBuilder().setKind("user").setFilter(PropertyFilter.gt("__key__", keyFactory.newKey(id))).build();
-    } 
-    
+    // If there is an id parameter, then return only that user
+    if (isID) {
+      query = Query.newEntityQueryBuilder().setKind("user")
+          .setFilter(PropertyFilter.gt("__key__", keyFactory.newKey(id))).build();
+    }
+
     QueryResults<Entity> results = datastore.run(query);
 
     // Turn the user info into an arraylist of user objects
@@ -104,25 +101,24 @@ public class UserServlet extends HttpServlet {
   }
 
   public FullEntity parseUserEntity(HttpServletRequest request) {
-      // get form information
-      String imgURL = Jsoup.clean(request.getParameter("imgURL"), Whitelist.none());
-      String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
-      String email = Jsoup.clean(request.getParameter("email"), Whitelist.none());
-      String[] wishlist = Jsoup.clean(request.getParameter("wishlist"), Whitelist.none()).split(",");
-      String[] teachlist = Jsoup.clean(request.getParameter("teachlist"), Whitelist.none()).split(",");
-      String id = Jsoup.clean(request.getParameter("id"), Whitelist.none());
+    // get form information
+    String imgURL = Jsoup.clean(request.getParameter("imgURL"), Whitelist.none());
+    String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
+    String email = Jsoup.clean(request.getParameter("email"), Whitelist.none());
+    String[] wishlist = Jsoup.clean(request.getParameter("wishlist"), Whitelist.none()).split(",");
+    String[] teachlist = Jsoup.clean(request.getParameter("teachlist"), Whitelist.none()).split(",");
+    String id = Jsoup.clean(request.getParameter("id"), Whitelist.none());
 
-      // add kind users to keyfactory
-      keyFactory.setKind("user");
+    // add kind users to keyfactory
+    keyFactory.setKind("user");
 
-      // take the user elements and create a new entity object for it
-      FullEntity userEntity = Entity.newBuilder(keyFactory.newKey(id)).set("imgURL", imgURL).set("name", name)
-          .set("email", email)
-          .set("wishlist", Arrays.asList(wishlist).stream().map(StringValue::of).collect(Collectors.toList()))
-          .set("teachlist", Arrays.asList(teachlist).stream().map(StringValue::of).collect(Collectors.toList())).build();
+    // take the user elements and create a new entity object for it
+    FullEntity userEntity = Entity.newBuilder(keyFactory.newKey(id)).set("imgURL", imgURL).set("name", name)
+        .set("email", email)
+        .set("wishlist", Arrays.asList(wishlist).stream().map(StringValue::of).collect(Collectors.toList()))
+        .set("teachlist", Arrays.asList(teachlist).stream().map(StringValue::of).collect(Collectors.toList())).build();
 
     return userEntity;
   }
-
 
 }

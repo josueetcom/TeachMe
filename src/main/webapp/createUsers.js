@@ -20,12 +20,12 @@ async function usersFetch() {
 // create a user template
 function createUserCard(user) {
   // make an empty card element
-  const UserCard = document.createElement('div');
-  UserCard.className = 'card homepage-card';
+  const userCard = document.createElement('div');
+  userCard.className = 'card homepage-card';
 
   // create the user banner
-  const UserBanner = document.createElement('div');
-  UserBanner.className = 'card-banner';
+  const userBanner = document.createElement('div');
+  userBanner.className = 'card-banner';
 
   // create the name banner
   const nameBanner = document.createElement('a');
@@ -51,10 +51,10 @@ function createUserCard(user) {
   });
 
   // combine them in user card and return
-  UserBanner.appendChild(nameBanner);
-  UserBanner.appendChild(userIMG);
-  UserBanner.appendChild(userTeachlist);
-  UserCard.appendChild(UserBanner);
+  userBanner.appendChild(nameBanner);
+  userBanner.appendChild(userIMG);
+  userBanner.appendChild(userTeachlist);
+  userCard.appendChild(userBanner);
 
-  return UserCard;
+  return userCard;
 }
