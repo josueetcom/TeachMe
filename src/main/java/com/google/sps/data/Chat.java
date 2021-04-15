@@ -124,6 +124,18 @@ public final class Chat {
         }
     }
 
+    public static Chat newMessage(Datastore datastore, String chatId, String userId, String message,) {
+        Key chatKey = datastore.newKeyFactory().setKind("chat").newKey(Long.parseLong(chatId));
+        Entity chatEntity = datastore.get(chatKey);
+
+        List<String> messages = chatEntity.getList("messages").stream().map(val -> ((StringValue) val).get()).collect(Collectors.toList());
+        messages.add(message);
+        chatEntity.set("messages", messages);
+
+        Chat chat = new Chat(chatEntity);
+        return chat;
+    }
+
     public long getId() {
         return id;
     }

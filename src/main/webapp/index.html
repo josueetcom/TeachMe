@@ -122,13 +122,23 @@
         <div class="card chat-card" id="chatboxCard">
           <h1 id="chatTitle">Chat with User</h1>
           <div class="container chat-container" id="chatMessages">
-            <p id="chatMessages">Messages here</p>
+            <p class="message-box" id="chatMessages">Messages here</p>
           </div>
-          <input
-            class="strip textbox-strip"
-            placeholder="Type your message..."
-          />
-          <button class="card-button">Send</button>
+
+          <form
+            method="POST"
+            action="/newmessage"
+            id="message-form"
+            style="width: 100%; height: fit-content"
+          >
+            <input
+              type="text"
+              class="strip textbox-strip"
+              name="textbox"
+              placeholder="Type your message..."
+            />
+          </form>
+          <button class="card-button" form="message-form">Send</button>
         </div>
 
         <div class="card small-card">
